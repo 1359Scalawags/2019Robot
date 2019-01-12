@@ -2,7 +2,7 @@
 package org.usfirst.frc.team1359.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.cameraserver.CameraServer; // changed
+import edu.wpi.first.cameraserver.CameraServer; // changed from edu.wpi.first.wpilibj.CameraServer
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
