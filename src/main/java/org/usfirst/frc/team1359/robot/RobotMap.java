@@ -31,7 +31,7 @@ public class RobotMap {
 	public static final int liftMotor = 6;
 	public static final int shooterPull = 5;
 
-	public static final int elevatorMotor = 0; // relay
+	public static final int pivotMotor = 0; // relay
 
 	// Limit Switches
 	public static final int grabLowerLimit = 9; // cube arm

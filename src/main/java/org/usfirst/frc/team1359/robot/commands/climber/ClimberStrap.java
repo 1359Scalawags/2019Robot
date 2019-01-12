@@ -25,10 +25,10 @@ public class ClimberStrap extends Command {
 		Robot.kClimber.ClimberArm(Robot.kOI.getArmStick());
 		
 		if(Robot.kOI.getAssistTriggerLeft() > .5) {
-			Robot.kClimber.climberStrap(-1);
+		//	Robot.kClimber.climberStrap(-1);
 		}
 		else {
-		Robot.kClimber.climberStrap(-Math.abs(Robot.kOI.getAssistTriggerLeft()));
+	//	Robot.kClimber.climberStrap(-Math.abs(Robot.kOI.getAssistTriggerLeft()));
 		}
 	}
 

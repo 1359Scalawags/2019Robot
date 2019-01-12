@@ -20,25 +20,22 @@ public class Climber extends Subsystem {
 	// here. Call these from Commands.
 	DigitalInput lowerLimit, upperLimit;
 	Talon climbMotorStrap;
-	//Relay elevatorMotor;
-	Talon elevatorMotor;
-	Solenoid rocker;
+	Talon pivotMotor;
 	boolean climberLocked;
 
 	public Climber() {
 
 		climbMotorStrap = new Talon(RobotMap.climbMotor);
-		elevatorMotor = new Talon(RobotMap.elevatorMotor);
+		pivotMotor = new Talon(RobotMap.pivotMotor);
 		lowerLimit = new DigitalInput(RobotMap.climbBottomLimit);
 		upperLimit = new DigitalInput(RobotMap.climbTopLimit);
-		rocker = new Solenoid(RobotMap.rocker);
 		climberLocked = true;
-		LiveWindow.add(elevatorMotor);
+		//Talon elevatorMotor2 = pivotMotor;
+		//LiveWindow.add(elevatorMotor2);
 	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new ClimberStrap());
+		//setDefaultCommand(new ClimberStrap());
 	}
 
 	public void unlockClimber() {
@@ -56,49 +53,49 @@ public class Climber extends Subsystem {
 		
 		//otherwise, stop
 		if(climberLocked) {
-			elevatorMotor.set(0);
+			pivotMotor.set(0);
 		}
 		else {
 			if(speed > 0 && !isElevated()) {
-				elevatorMotor.set(speed);
+				pivotMotor.set(speed);
 			}
 			else if(speed < 0 && !isRetracted()) {
-				elevatorMotor.set(speed);
+				pivotMotor.set(speed);
 			}
 			else {
-				elevatorMotor.set(0);
+				pivotMotor.set(0);
 			}
 		}
 	}
 	
-	public boolean isRockedForward( ) {
-		return rocker.get();
-	}
+	// public boolean isRockedForward( ) {
+	// 	return rocker.get();
+	// }
 
-	public void rockForward() {
+	// public void rockForward() {
 		
-		rocker.set(true);
-	}
+	// 	rocker.set(true);
+	// }
 
-	public void rockBackward() {
-		rocker.set(false);
-	}
+	// public void rockBackward() {
+	// 	rocker.set(false);
+	// }
 
-	public void climberStrap(double speed) {
-		// warning: this motor is under user control...no protections at this point
-		if(climberLocked) {
-			climbMotorStrap.set(0);
-		}else {
-			climbMotorStrap.set(speed);
-		}
-	}
+	// public void climberStrap(double speed) {
+	// 	// warning: this motor is under user control...no protections at this point
+	// 	if(climberLocked) {
+	// 		climbMotorStrap.set(0);
+	// 	}else {
+	// 		climbMotorStrap.set(speed);
+	// 	}
+	// }
 
 	public void stopArm() {
-		elevatorMotor.set(0);
+		pivotMotor.set(0);
 	}
 
 	public boolean isElevated() {
-		boolean value = (upperLimit.get() == Constants.pressed);
+		boolean value = (upperLimit.get() == Constants.pressed); // pressed is false
 		return value;
 	}
 
