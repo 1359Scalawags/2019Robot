@@ -10,8 +10,8 @@ package org.usfirst.frc.team1359.robot;
 import org.usfirst.frc.team1359.robot.commands.SwitchDriveDirection;
 import org.usfirst.frc.team1359.robot.commands.arm.CubeGrab;
 import org.usfirst.frc.team1359.robot.commands.arm.CubeRelease;
-import org.usfirst.frc.team1359.robot.commands.climber.RockClimberArmBackward;
-import org.usfirst.frc.team1359.robot.commands.climber.RockClimberArmForward;
+import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoClimbPosition;
+import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoDrivePosition;
 import org.usfirst.frc.team1359.robot.commands.climber.UnLockCLimber;
 import org.usfirst.frc.team1359.robot.commands.drive.EnableDriveStraight;
 import org.usfirst.frc.team1359.robot.commands.shooter.PrepareToLaunchShooter;
@@ -52,8 +52,8 @@ public class OI {
 		drawShooter.whenPressed(new PullShooter());
 		releaseShooter.whenPressed(new ReleaseShooter());
 		enableClimberButton.whenPressed(new UnLockCLimber());
-		rockForwardButton.whenPressed(new RockClimberArmForward());
-		rockBackwardButton.whenPressed(new RockClimberArmBackward());
+		rockForwardButton.whenPressed(new MoveIntoDrivePosition());
+		rockBackwardButton.whenPressed(new MoveIntoClimbPosition());
 		reverseDriverButton.whenPressed(new SwitchDriveDirection());
 		
 		driveStraightEnable.whenPressed(new EnableDriveStraight());

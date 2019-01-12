@@ -4,13 +4,14 @@ import org.usfirst.frc.team1359.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team1359.robot.Constants;
 /**
  *
  */
-public class ClimberArm extends Command {
+public class MoveIntoDrivePosition extends Command {
 
-    public ClimberArm() {
-    	super("CLimberArm");
+    public MoveIntoDrivePosition() {
+    	super("MoveIntoDrivePosition");
     	requires(Robot.kClimber);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -18,17 +19,22 @@ public class ClimberArm extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+       // Robot.kClimber.switchSpeedDirection();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+        Robot.kClimber.ClimberRotate(-(Constants.climbMotorSpeed));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        if(Robot.kClimber.isDrivePosition()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     // Called once after isFinished returns true

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1359.robot.commands.climber;
 
+import org.usfirst.frc.team1359.robot.Constants;
+
 import org.usfirst.frc.team1359.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RockClimberArmForward extends Command {
+public class MoveIntoClimbPosition extends Command {
 
-    public RockClimberArmForward() {
-    	super("RockClimberArmForward");
+    public MoveIntoClimbPosition() {
+    	super("MoveIntoClimbPosition");
     	requires(Robot.kClimber);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -22,12 +24,17 @@ public class RockClimberArmForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.kClimber.rockForward();
+        Robot.kClimber.ClimberRotate(Constants.climbMotorSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        if(Robot.kClimber.isClimbPosition()){
+            return true;
+        }
+       else{
+           return false;
+       }
     }
 
     // Called once after isFinished returns true
@@ -37,5 +44,6 @@ public class RockClimberArmForward extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        Robot.kClimber.stopClimber();
     }
 }

@@ -15,8 +15,9 @@ public class Climber extends Subsystem {
 	Talon climbMotorStrap;
 	Talon pivotMotor;
 	boolean climberLocked;
+	//double speedChanger;
 
-	private final static int MotorMultiplier = 1; // change to -1 if motor is reversed
+	private final static int MotorMultiplier = 1; // change to -1 to reverse motor direction
 
 	public Climber() {
 
@@ -28,7 +29,6 @@ public class Climber extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new ClimberStrap());
 	}
 
 	public void unlockClimber() {
@@ -40,11 +40,8 @@ public class Climber extends Subsystem {
 	}
 	
 	public void ClimberRotate(double speed) {
-		//if speed is positive and top limit is not pressed...go up
-		
-		//if speed is negative and bottom limit is not pressed...go down
-		
-		//otherwise, stop
+		//speed = speedChanger;
+
 		if(climberLocked) {
 			pivotMotor.set(0);
 		}
@@ -61,18 +58,21 @@ public class Climber extends Subsystem {
 		}
 	}
 
+	// public void switchSpeedDirection(){
+	// 	speedChanger = -(speedChanger);
+	// }
+
 	public void stopClimber() {
 		pivotMotor.set(0);
 	}
 
 	public boolean isClimbPosition() {
-		boolean value = (upperLimit.get() == Constants.pressed); // pressed is false
-		return value;
+		return (upperLimit.get() == Constants.pressed); // pressed is false
 	}
 
 	public boolean isDrivePosition() {
-		boolean value = (lowerLimit.get() == Constants.pressed);
-		return value;
+		return (lowerLimit.get() == Constants.pressed);
+		
 	}
 	
 	

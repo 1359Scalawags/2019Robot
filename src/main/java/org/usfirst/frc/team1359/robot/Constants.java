@@ -2,11 +2,16 @@ package org.usfirst.frc.team1359.robot;
 
 public class Constants {
 
+	//2019 constants
+	public static final double climbMotorSpeed = 2; // random value 1/12/19 
+
 	public static final boolean pressed = false;
 	public static final boolean notPressed = true;
 	public static final boolean locked = false;
 	public static final boolean unLocked = true;
 
+
+	// 2018 things
 	public static final double feetPerPulse = 0.0044;
 	public static final double maxMotorSpeed = 0.95;
 	public static final double pulsesPerFoot = 229.183118052;
