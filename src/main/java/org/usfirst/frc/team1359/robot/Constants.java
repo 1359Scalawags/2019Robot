@@ -4,6 +4,8 @@ public class Constants {
 
 	//2019 constants
 	public static final double climbMotorSpeed = 2; // random value 1/12/19 
+	public static final double rotateArmSpeed = 2; // random value 1/12/19
+	public static final double moveBeltSpeed = 2; // random value 1/12/19
 
 	public static final boolean pressed = false;
 	public static final boolean notPressed = true;

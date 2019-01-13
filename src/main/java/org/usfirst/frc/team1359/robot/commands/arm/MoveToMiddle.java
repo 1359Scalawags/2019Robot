@@ -31,7 +31,7 @@ public class MoveToMiddle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.kPIDDriveSystem.arcadeDrive(Constants.approachSwitchSpeed, 0);
-    	Robot.kCubeLoader.move(Constants.moveToMiddleArmSpeed);
+    //	Robot.kCubeLoader.moveBelts(Constants.moveToMiddleArmSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +46,7 @@ public class MoveToMiddle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.kCubeLoader.stop();
+    	Robot.kCubeLoader.stopBelts();
     	Robot.kPIDDriveSystem.arcadeDrive(0,0);
     	moveArmTimer.stop();
     }

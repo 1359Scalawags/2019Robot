@@ -15,7 +15,7 @@ import org.usfirst.frc.team1359.robot.commands.autonomous.TurnByAngle;
 import org.usfirst.frc.team1359.robot.subsystems.Aesthetics;
 import org.usfirst.frc.team1359.robot.subsystems.Camera;
 import org.usfirst.frc.team1359.robot.subsystems.Climber;
-import org.usfirst.frc.team1359.robot.subsystems.CubeLoader;
+import org.usfirst.frc.team1359.robot.subsystems.ArmManipulator;
 import org.usfirst.frc.team1359.robot.subsystems.CubeShooter;
 import org.usfirst.frc.team1359.robot.subsystems.PIDDriveSystem;
 import org.usfirst.frc.team1359.robot.subsystems.PneumaticsSystem;
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
 	public static final Aesthetics kAesthetics = new Aesthetics();
 	public static OI kOI;
 	public static final Climber kClimber = new Climber();
-	public static final CubeLoader kCubeLoader = new CubeLoader();
+	public static final ArmManipulator kCubeLoader = new ArmManipulator();
 	public static final CubeShooter kCubeShooter = new CubeShooter();
 	public static final PneumaticsSystem kPneumatics = new PneumaticsSystem();
 	public static final Camera kcamera = new Camera();

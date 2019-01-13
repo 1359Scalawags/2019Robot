@@ -28,10 +28,12 @@ public class RobotMap {
 	public static final int rightEncoderB = 13;
 
 	public static final int climbMotor = 4;
-	public static final int liftMotor = 6;
 	public static final int shooterPull = 5;
 
-	public static final int pivotMotor = 0; // relay
+	public static final int pivotMotor = 0;
+	public static final int rightBeltMotor = 99; // random port 1/12/19
+	public static final int leftBeltMotor = 6;
+	public static final int rotateArmMotor = 99; //  random port 1/12/19 
 
 	// Limit Switches
 	public static final int grabLowerLimit = 9; // cube arm

@@ -22,7 +22,7 @@ public class CubeMove extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.kCubeLoader.move(Robot.kOI.getGrabberStick());
+    //	Robot.kCubeLoader.moveBelts(Robot.kOI.getGrabberStick());
     }
 
     // Make this return true when this Command no longer needs to run execute()
