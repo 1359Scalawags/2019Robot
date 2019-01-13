@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CubeGrab extends Command {
+public class BallIntake extends Command {
 
-	public CubeGrab() {
-		super("CubeGrab");
-		requires(Robot.kCubeLoader);
-		requires(Robot.kPneumatics);
+	public BallIntake() {
+		super("BallIntake");
+		requires(Robot.kArmManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 
@@ -24,12 +23,12 @@ public class CubeGrab extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
+		Robot.kArmManipulator.moveBeltsIn();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+	return false;
 	}
 
 	// Called once after isFinished returns true
@@ -39,5 +38,6 @@ public class CubeGrab extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.kArmManipulator.stopBelts();
 	}
 }

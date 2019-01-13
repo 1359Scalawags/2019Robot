@@ -1,10 +1,10 @@
 package org.usfirst.frc.team1359.robot.commands.autonomous;
 
-import org.usfirst.frc.team1359.robot.commands.arm.MoveToMiddle;
+import org.usfirst.frc.team1359.robot.commands.arm.StopBelts;
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeGrab;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeRelease;
+import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
+import org.usfirst.frc.team1359.robot.commands.arm.MoveArmsDown;
 import org.usfirst.frc.team1359.robot.commands.autonomous.DriveStraightDistance;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -20,27 +20,27 @@ public class AutonomousMiddlePosition extends CommandGroup {
 	public AutonomousMiddlePosition() {
 		super("AutonomousMiddlePosition");
 		requires(Robot.kPIDDriveSystem);
-		requires(Robot.kCubeLoader);
+		requires(Robot.kArmManipulator);
 		DriverStation driverStation = DriverStation.getInstance();
 
 		switchPos = driverStation.getGameSpecificMessage().charAt(0);
 
 		if (switchPos == 'L') { // left switch
-			addSequential(new CubeGrab());
+			addSequential(new BallIntake());
 			addSequential(new DriveStraightDistance(Constants.avoidSwitchDistanceShort, Constants.autoDriveShortSpeed));
 			addSequential(new TurnByAngle(-90));
 			addSequential(new DriveStraightDistance(Constants.avoidCubesMiddle, Constants.autoDriveShortSpeed));
 			addSequential(new TurnByAngle(90));
 			addSequential(new DriveStraightDistance(Constants.avoidSwitchDistanceLong, Constants.autoDriveShortSpeed));
 			if (Robot.AutonomousMiddlePriority == "Yes") {
-				addSequential(new MoveToMiddle()); 
-				addSequential(new CubeRelease());
+				addSequential(new StopBelts()); 
+		//		addSequential(new MovesArmDown());
 			} else {
 
 			}
 
 		} else { // right switch
-			addSequential(new CubeGrab());
+			addSequential(new BallIntake());
 			addSequential(new DriveStraightDistance(Constants.avoidSwitchDistanceShort, Constants.autoDriveShortSpeed));
 			addSequential(new TurnByAngle(90));
 			addSequential(new DriveStraightDistance(Constants.avoidCubesMiddle, Constants.autoDriveShortSpeed));
@@ -52,8 +52,8 @@ public class AutonomousMiddlePosition extends CommandGroup {
 //			addSequential(new TurnByAngle(-90));
 //			addSequential(new DriveStraightDistance(Constants.avoidSwitchDistanceShort, Constants.autoDriveShortSpeed));
 			if (Robot.AutonomousMiddlePriority == "Yes") {
-				addSequential(new MoveToMiddle()); 
-				addSequential(new CubeRelease());
+				addSequential(new StopBelts()); 
+		//		addSequential(new MovesArmDown());
 			} else {
 
 			}

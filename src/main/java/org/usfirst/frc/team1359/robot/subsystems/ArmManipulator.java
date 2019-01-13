@@ -2,7 +2,6 @@ package org.usfirst.frc.team1359.robot.subsystems;
 
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.RobotMap;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeMove;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
@@ -12,6 +11,7 @@ public class ArmManipulator extends Subsystem {
 
 	DigitalInput bottomLimit, topLimit;
 	Talon leftBeltMotor , rightBeltMotor , rotateArmMotor;
+	//boolean beltsLocked; //still need to map the button
 
 	private static final int rotateMotorMulitiplier = 1; // change to -1 to reverse direction for rotateMotor
 	private static final int leftBeltMotorMultiplier = 1; // change to -1 to reverse direction for leftBeltMotor
@@ -30,6 +30,7 @@ public class ArmManipulator extends Subsystem {
 		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
 		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
 		rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
+		//beltsLocked = true;
 	}
 
 	public void initDefaultCommand() {
@@ -37,9 +38,23 @@ public class ArmManipulator extends Subsystem {
 		//setDefaultCommand(new CubeMove());
 	}
 	
-	public void moveBelts() {
-			leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
-			rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+	public void moveBeltsIn() {
+		// if(beltsLocked){
+		// 	stopBelts();
+		// }
+		// else{
+		// 	leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
+		// 	rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+		// }
+		
+		 	leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
+		 	rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+	}
+
+	public void moveBeltsOut(){
+		
+		 	leftBeltMotor.set(-(Constants.moveBeltSpeed * leftBeltMotorMultiplier));
+		 	rightBeltMotor.set(Constants.moveBeltSpeed * rightBeltMotorMultiplier);
 	}
 	
 	public void rotateArms(ArmPosition pos) {
@@ -88,6 +103,14 @@ public class ArmManipulator extends Subsystem {
 		leftBeltMotor.set(0);
 		rightBeltMotor.set(0);
 	}
+
+	// public void unlockBelts(){
+	// 	beltsLocked = false;
+	// }
+
+	// public boolean getBeltsLocked(){
+	// 	return beltsLocked;
+	// }
 
 	public boolean isUp() {
 		return (topLimit.get() == Constants.pressed);

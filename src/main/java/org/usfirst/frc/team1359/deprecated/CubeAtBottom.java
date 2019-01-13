@@ -12,7 +12,7 @@ public class CubeAtBottom extends Command {
 
 	public CubeAtBottom() {
 		super("CubeLoweredBottom");
-		requires(Robot.kCubeLoader);
+		requires(Robot.kArmManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis); legalize awoo
 	}
@@ -29,13 +29,13 @@ public class CubeAtBottom extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.kCubeLoader.isDown();
+		return Robot.kArmManipulator.isDown();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
 
-		Robot.kCubeLoader.stopBelts();
+		Robot.kArmManipulator.stopBelts();
 	}
 
 	// Called when another command which requires one or more of the same

@@ -2,15 +2,20 @@ package org.usfirst.frc.team1359.robot.commands.arm;
 
 import org.usfirst.frc.team1359.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class CubeMove extends Command {
+public class StopBelts extends Command {
 
-    public CubeMove() {
-    	requires(Robot.kCubeLoader);
+	Timer moveArmTimer;
+	
+    public StopBelts() {
+    	super("StopBelts");
+    	requires(Robot.kArmManipulator);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,14 +26,14 @@ public class CubeMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    //	Robot.kCubeLoader.moveBelts(Robot.kOI.getGrabberStick());
+        SmartDashboard.putBoolean("Belts stopped", false);
+        Robot.kArmManipulator.stopBelts();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-    }
+        return true;
+    	}
 
     // Called once after isFinished returns true
     protected void end() {

@@ -1,19 +1,17 @@
-package org.usfirst.frc.team1359.deprecated;
+package org.usfirst.frc.team1359.robot.commands.arm;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ArmManipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CubeAtTop extends Command {
+public class BallOutake extends Command {
 
-	public CubeAtTop() {
-		super("CubeLiftedTop");
+	public BallOutake() {
+		super("BallOutake");
 		requires(Robot.kArmManipulator);
-
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -24,24 +22,21 @@ public class CubeAtTop extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
-	//	Robot.kCubeLoader.moveBelts(ArmManipulator.ArmPosition.UP);
+		Robot.kArmManipulator.moveBeltsOut();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.kArmManipulator.isUp();
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-
-		Robot.kArmManipulator.stopBelts();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		end();
+		Robot.kArmManipulator.stopBelts();
 	}
 }

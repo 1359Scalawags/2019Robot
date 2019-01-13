@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
 	public static final Aesthetics kAesthetics = new Aesthetics();
 	public static OI kOI;
 	public static final Climber kClimber = new Climber();
-	public static final ArmManipulator kCubeLoader = new ArmManipulator();
+	public static final ArmManipulator kArmManipulator = new ArmManipulator();
 	public static final CubeShooter kCubeShooter = new CubeShooter();
 	public static final PneumaticsSystem kPneumatics = new PneumaticsSystem();
 	public static final Camera kcamera = new Camera();

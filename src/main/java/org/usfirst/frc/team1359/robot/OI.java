@@ -8,8 +8,8 @@
 package org.usfirst.frc.team1359.robot;
 
 import org.usfirst.frc.team1359.robot.commands.SwitchDriveDirection;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeGrab;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeRelease;
+import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
+import org.usfirst.frc.team1359.robot.commands.arm.MoveArmsDown;
 import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoClimbPosition;
 import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoDrivePosition;
 import org.usfirst.frc.team1359.robot.commands.climber.UnLockCLimber;
@@ -47,8 +47,8 @@ public class OI {
 
 	public OI() {
 		drawShooter.whenPressed(new PrepareToLaunchShooter());
-		grabCubeButton.whenPressed(new CubeGrab());
-		releaseCubeButton.whenPressed(new CubeRelease());
+		grabCubeButton.whenPressed(new BallIntake());
+		releaseCubeButton.whenPressed(new MoveArmsDown());
 		drawShooter.whenPressed(new PullShooter());
 		releaseShooter.whenPressed(new ReleaseShooter());
 		enableClimberButton.whenPressed(new UnLockCLimber());

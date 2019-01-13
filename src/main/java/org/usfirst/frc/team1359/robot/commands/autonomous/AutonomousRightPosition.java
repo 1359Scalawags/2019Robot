@@ -1,11 +1,11 @@
 package org.usfirst.frc.team1359.robot.commands.autonomous;
 
-import org.usfirst.frc.team1359.robot.commands.arm.MoveToMiddle;
+import org.usfirst.frc.team1359.robot.commands.arm.StopBelts;
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.commands.Delay;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeGrab;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeRelease;
+import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
+import org.usfirst.frc.team1359.robot.commands.arm.MoveArmsDown;
 import org.usfirst.frc.team1359.robot.commands.autonomous.DriveStraightDistance;
 import org.usfirst.frc.team1359.robot.commands.shooter.ReleaseShooter;
 
@@ -25,7 +25,7 @@ public class AutonomousRightPosition extends CommandGroup {
 	public AutonomousRightPosition() {
 		super("AutonomousRightPosition");
 		requires(Robot.kPIDDriveSystem);
-		requires(Robot.kCubeLoader);
+		requires(Robot.kArmManipulator);
 		requires(Robot.kCubeShooter);
 
 		DriverStation driverStation = DriverStation.getInstance();
@@ -38,23 +38,23 @@ public class AutonomousRightPosition extends CommandGroup {
 				SmartDashboard.putString("Switch Close", "Right");
 			}
 			else {
-			addSequential(new CubeGrab());
+			addSequential(new BallIntake());
 			addSequential(new DriveStraightDistance(Constants.distanceToSwitchCenterline, Constants.autoDriveSpeed)); // random value in MoveForward()
 			addSequential(new TurnByAngle(-90));
 			addSequential(new DriveStraightDistance(Constants.approachSwitchEnd, Constants.autoDriveSpeed*.75));
-			addSequential(new MoveToMiddle());  
-			addSequential(new CubeRelease());
+			addSequential(new StopBelts());  
+	//		addSequential(new MovesArmDown());
 			SmartDashboard.putString("Switch Close", "Right");
 			}
 		} else if (scalePos == 'R' && switchPosNear == 'L') { // drop cube in scale
 				shootRightScale();
 		} else if (scalePos == 'R' && switchPosNear == 'R') { // determined by smartDashboard
 			if (Robot.AutonomousLeftOrRightPriority.equals("Switch")) { // drop cube in switch
-				addSequential(new CubeGrab());
+				addSequential(new BallIntake());
 				addSequential(new DriveStraightDistance(Constants.distanceToSwitchCenterline, Constants.autoDriveSpeed)); // random value in MoveForward()
 				addSequential(new TurnByAngle(-90));
-				addSequential(new MoveToMiddle()); // CHANGE THIS
-				addSequential(new CubeRelease());
+				addSequential(new StopBelts()); // CHANGE THIS
+		//		addSequential(new MovesArmDown());
 				SmartDashboard.putString("Switch Close", "Right");
 			} else if (Robot.AutonomousLeftOrRightPriority.equals("Scale")) { // drop cube in scale
 				shootRightScale();
@@ -80,11 +80,11 @@ public class AutonomousRightPosition extends CommandGroup {
 	}
 	
 	public void shootRightScale() {
-		addSequential(new CubeGrab());
+		addSequential(new BallIntake());
 		addSequential(new DriveStraightDistance(Constants.distanceToScaleCenterline, Constants.autoDriveSpeed)); // random value in MoveForward()
 		addSequential(new TurnByAngle(115));
 		addSequential(new DriveStraightDistance(Constants.approachScaleEnd, Constants.autoDriveSpeed)); // random value in MoveForward()
-		addSequential(new CubeRelease());
+	//	addSequential(new MovesArmDown());
 		addSequential(new Delay());
 		addSequential(new ReleaseShooter()); // assuming PrepareToLaunchShooter was already ran
 		addSequential(new Delay());
@@ -93,7 +93,7 @@ public class AutonomousRightPosition extends CommandGroup {
 	}
 	
 	public void shootOppositeScale() {
-		addSequential(new CubeGrab());
+		addSequential(new BallIntake());
 		addSequential(new DriveStraightDistance(Constants.distanceToMiddle, Constants.autoDriveSpeed));
 		addSequential(new TurnByAngle(-90));
 		addSequential(new DriveStraightDistance(Constants.distanceAcrossScale, Constants.autoDriveSpeed));
@@ -101,7 +101,7 @@ public class AutonomousRightPosition extends CommandGroup {
 		addSequential(new DriveStraightDistance(Constants.approachScaleBox, Constants.autoDriveSpeed));
 		addSequential(new TurnByAngle(45));
 		addSequential(new TurnByAngle(1));
-		addSequential(new CubeRelease());
+	//	addSequential(new MovesArmDown());
 		addSequential(new Delay());
 		addSequential(new ReleaseShooter());
 	}

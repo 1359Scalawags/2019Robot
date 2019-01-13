@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1359.robot.commands.autonomous;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.commands.arm.CubeGrab;
-import org.usfirst.frc.team1359.robot.commands.arm.MoveToMiddle;
+import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
+import org.usfirst.frc.team1359.robot.commands.arm.StopBelts;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -30,9 +30,9 @@ public class TestGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new CubeGrab());
+    	addSequential(new BallIntake());
     	addSequential(new TurnByAngle(45));
-    	addSequential(new MoveToMiddle());
+    	addSequential(new StopBelts());
     	
     }
 }
