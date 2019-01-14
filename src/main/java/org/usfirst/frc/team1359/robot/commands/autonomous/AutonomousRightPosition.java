@@ -7,7 +7,7 @@ import org.usfirst.frc.team1359.robot.commands.Delay;
 import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
 import org.usfirst.frc.team1359.robot.commands.arm.MoveArmsDown;
 import org.usfirst.frc.team1359.robot.commands.autonomous.DriveStraightDistance;
-import org.usfirst.frc.team1359.robot.commands.shooter.ReleaseShooter;
+//import org.usfirst.frc.team1359.robot.commands.shooter.ReleaseShooter;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -26,7 +26,7 @@ public class AutonomousRightPosition extends CommandGroup {
 		super("AutonomousRightPosition");
 		requires(Robot.kPIDDriveSystem);
 		requires(Robot.kArmManipulator);
-		requires(Robot.kCubeShooter);
+		requires(Robot.kElevatorManipulator);
 
 		DriverStation driverStation = DriverStation.getInstance();
 		switchPosNear = driverStation.getGameSpecificMessage().charAt(0);
@@ -86,7 +86,7 @@ public class AutonomousRightPosition extends CommandGroup {
 		addSequential(new DriveStraightDistance(Constants.approachScaleEnd, Constants.autoDriveSpeed)); // random value in MoveForward()
 	//	addSequential(new MovesArmDown());
 		addSequential(new Delay());
-		addSequential(new ReleaseShooter()); // assuming PrepareToLaunchShooter was already ran
+	//	addSequential(new ReleaseShooter()); // assuming PrepareToLaunchShooter was already ran
 		addSequential(new Delay());
 		addSequential(new DriveStraightDistance(2.5, Constants.autoDriveSpeed*.5));
 		SmartDashboard.putString("Scale Close", "Right");
@@ -103,6 +103,6 @@ public class AutonomousRightPosition extends CommandGroup {
 		addSequential(new TurnByAngle(1));
 	//	addSequential(new MovesArmDown());
 		addSequential(new Delay());
-		addSequential(new ReleaseShooter());
+	//	addSequential(new ReleaseShooter());
 	}
 }

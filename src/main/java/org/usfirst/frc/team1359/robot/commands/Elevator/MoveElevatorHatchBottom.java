@@ -1,19 +1,18 @@
-package org.usfirst.frc.team1359.robot.commands.shooter;
+package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
+import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorHatchHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ForceLockShooter extends Command {
+public class MoveElevatorHatchBottom extends Command {
 
-	public ForceLockShooter() {
-		super("ForceLockShooter");
-		requires(Robot.kCubeShooter);
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+	public MoveElevatorHatchBottom() {
+		super("MoveElevatorHatchBottom");
+		requires(Robot.kElevatorManipulator);
 	}
 
 	// Called just before this Command runs the first time
@@ -22,12 +21,12 @@ public class ForceLockShooter extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kCubeShooter.lockShooter();
+		Robot.kElevatorManipulator.moveElevatorHatch(elevatorHatchHeight.BOTTOM);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return Robot.kElevatorManipulator.isDownMax(); // isToHeight also works
 	}
 
 	// Called once after isFinished returns true
@@ -37,5 +36,6 @@ public class ForceLockShooter extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		// this command is not interruptible
 	}
 }

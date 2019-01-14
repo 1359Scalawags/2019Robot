@@ -25,8 +25,8 @@ public class ArmManipulator extends Subsystem {
 
 	public ArmManipulator() {
 		
-		bottomLimit = new DigitalInput(RobotMap.grabLowerLimit);
-		topLimit = new DigitalInput(RobotMap.grabUpperLimit);
+		bottomLimit = new DigitalInput(RobotMap.armBottomLimit);
+		topLimit = new DigitalInput(RobotMap.armTopLimit);
 		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
 		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
 		rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
@@ -119,6 +119,4 @@ public class ArmManipulator extends Subsystem {
 	public boolean isDown() {
 		return (bottomLimit.get() == Constants.pressed);
 	}
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 }

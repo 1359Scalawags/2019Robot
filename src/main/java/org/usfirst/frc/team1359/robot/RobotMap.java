@@ -27,24 +27,25 @@ public class RobotMap {
 	public static final int rightEncoderA = 12;
 	public static final int rightEncoderB = 13;
 
-	public static final int climbMotor = 4;
-	public static final int shooterPull = 5;
+	public static final int elevatorHeightPot = 99; // 2019 pot
 
-	public static final int pivotMotor = 0;
-	public static final int rightBeltMotor = 99; // random port 1/12/19
-	public static final int leftBeltMotor = 6;
-	public static final int rotateArmMotor = 99; //  random port 1/12/19 
+	// motors
+	public static final int elevatorSlideMotor = 99; 
+	public static final int pivotMotor = 99; 
+	public static final int rightBeltMotor = 99;
+	public static final int leftBeltMotor = 99;
+	public static final int rotateArmMotor = 99; 
+	public static final int elevatorLiftMotor = 99;
 
 	// Limit Switches
-	public static final int grabLowerLimit = 9; // cube arm
-	public static final int grabUpperLimit = 8; // cube arm
-	public static final int shooterDownLimit = 7; // limit
-	public static final int strapunwoundlimit = 6; // limit
-	public static final int climbTopLimit = 5; // climb arm
-	public static final int climbBottomLimit = 4; // climb arm
-	
-	
-	
+	public static final int armBottomLimit = 99; 
+	public static final int armTopLimit = 99; 
+	public static final int elevatorBottomLimit = 99; 
+	public static final int elevatorToplimit = 99; 
+	public static final int climbUpperLimit = 99;
+	public static final int climbLowerLimit = 99; 
+	public static final int elevatorSlideLeftLimit = 99; 
+	public static final int elevatorSlideRightLimit = 99; 
 
 	// gameController
 	public static final int mainController = 0;
@@ -85,14 +86,6 @@ public class RobotMap {
 
 	// Extra
 	public static final int leonardo = 0;
-
-	public static final float cubeloaderpot = 0; // potentiometer
-
-	// Pneumatics
-	public static final int compressor = 0;
-	public static final int armValve = 0; // solenoid
-	public static final int shooterLock = 1; // solenoid
-	public static final int rocker = 3; // solenoid
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 }

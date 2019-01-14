@@ -3,15 +3,26 @@ package org.usfirst.frc.team1359.robot;
 public class Constants {
 
 	//2019 constants
-	public static final double climbMotorSpeed = 2; // random value 1/12/19 
-	public static final double rotateArmSpeed = 2; // random value 1/12/19
-	public static final double moveBeltSpeed = 2; // random value 1/12/19
+	public static final double climbMotorSpeed = 2; // random value 
+	public static final double rotateArmSpeed = 2; // random value 
+	public static final double moveBeltSpeed = 2; // random value 
+	public static final double elevatorLiftSpeed = 2; // random value
+
+	public static final double hatchBaseHeight = 2; // random value
+	public static final double hatchMiddleHeight = 2; // random value
+	public static final double hatchTopHeight = 2; // random value
+	public static final double hatchBottomHeight = 2; // random value
+
+	public static final double cargoLowerHeight = 2; // random value
+	public static final double cargoMiddleHeight = 2; // random value
+	public static final double cargoTopHeight = 2; // random value
+
+	public static final double anglePerValue = 200; // random value 
 
 	public static final boolean pressed = false;
 	public static final boolean notPressed = true;
 	public static final boolean locked = false;
 	public static final boolean unLocked = true;
-
 
 	// 2018 things
 	public static final double feetPerPulse = 0.0044;
@@ -26,7 +37,6 @@ public class Constants {
 	public static final double shooterPullSpeed = 0.75;
 	public static final double elevatorSpeed = 0.75;
 
-	public static final double anglePerValue = 200; 
 	public static final int samplesToAverage = 2;
 
 	// gameController

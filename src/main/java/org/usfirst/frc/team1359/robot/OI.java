@@ -14,9 +14,9 @@ import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoClimbPosition;
 import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoDrivePosition;
 import org.usfirst.frc.team1359.robot.commands.climber.UnLockCLimber;
 import org.usfirst.frc.team1359.robot.commands.drive.EnableDriveStraight;
-import org.usfirst.frc.team1359.robot.commands.shooter.PrepareToLaunchShooter;
-import org.usfirst.frc.team1359.robot.commands.shooter.PullShooter;
-import org.usfirst.frc.team1359.robot.commands.shooter.ReleaseShooter;
+import org.usfirst.frc.team1359.robot.commands.Elevator.ChangeCommandsForButton;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorHatchBottom;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorCargoLower;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -46,11 +46,11 @@ public class OI {
 	Button retractClimberButton = new JoystickButton(mainPad, RobotMap.xboxA);
 
 	public OI() {
-		drawShooter.whenPressed(new PrepareToLaunchShooter());
+		drawShooter.whenPressed(new ChangeCommandsForButton());
 		grabCubeButton.whenPressed(new BallIntake());
 		releaseCubeButton.whenPressed(new MoveArmsDown());
-		drawShooter.whenPressed(new PullShooter());
-		releaseShooter.whenPressed(new ReleaseShooter());
+		drawShooter.whenPressed(new MoveElevatorHatchBottom());
+		releaseShooter.whenPressed(new MoveElevatorCargoLower());
 		enableClimberButton.whenPressed(new UnLockCLimber());
 		rockForwardButton.whenPressed(new MoveIntoDrivePosition());
 		rockBackwardButton.whenPressed(new MoveIntoClimbPosition());
@@ -62,7 +62,7 @@ public class OI {
 	public double getMainTriggers() {
 		return Math.max(mainPad.getTriggerAxis(Hand.kLeft), mainPad.getTriggerAxis(Hand.kRight));
 	}
-	public double getAssistTriggerLeft() { // move climber Strap
+	public double getAssistTriggerLeft() { 
 		return assistPad.getTriggerAxis(Hand.kLeft);
 	}
 	public double getAssistTriggerRight() {
@@ -75,6 +75,19 @@ public class OI {
 		} else {
 			return 0;
 		}
+	}
+	//2019
+	public double getLStickX(){
+		if(Math.abs(mainPad.getX(Hand.kLeft)) > Constants.controllerDeadZone){
+			return -(mainPad.getX(Hand.kLeft) * (.3 * getMainTriggers() + .7));
+		}
+		else{
+			return 0;
+		}
+	}
+	//2019
+	public double getSliderStick(){ // move elevator slider
+		return assistPad.getX(Hand.kLeft);
 	}
 
 	public double getRStickY() {

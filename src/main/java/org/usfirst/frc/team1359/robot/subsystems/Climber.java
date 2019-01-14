@@ -12,7 +12,6 @@ public class Climber extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	DigitalInput lowerLimit, upperLimit;
-	Talon climbMotorStrap;
 	Talon pivotMotor;
 	boolean climberLocked;
 	//double speedChanger;
@@ -21,10 +20,9 @@ public class Climber extends Subsystem {
 
 	public Climber() {
 
-		climbMotorStrap = new Talon(RobotMap.climbMotor);
 		pivotMotor = new Talon(RobotMap.pivotMotor);
-		lowerLimit = new DigitalInput(RobotMap.climbBottomLimit);
-		upperLimit = new DigitalInput(RobotMap.climbTopLimit);
+		lowerLimit = new DigitalInput(RobotMap.climbLowerLimit);
+		upperLimit = new DigitalInput(RobotMap.climbUpperLimit);
 		climberLocked = true;
 	}
 

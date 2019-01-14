@@ -1,52 +1,43 @@
-package org.usfirst.frc.team1359.robot.commands.shooter;
+package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
+import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorHatchHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class PullShooter extends Command {
+public class MoveElevatorHatchBase extends Command {
 
-	public PullShooter() {
-		super("PullShooter");
-		requires(Robot.kCubeShooter);
+	public MoveElevatorHatchBase() {
+		super("MoveElevatorHatchBase");
+		requires(Robot.kElevatorManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		//setInterruptible(false);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.kCubeShooter.lockShooter();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(!Robot.kCubeShooter.isDown()) {
-			Robot.kCubeShooter.pullShooter();
-		}
-		else {
-			Robot.kCubeShooter.stopShooterMotor();
-		}
+		Robot.kElevatorManipulator.moveElevatorHatch(elevatorHatchHeight.BASE);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.kCubeShooter.isDown();
+	return	Robot.kElevatorManipulator.isToHeight();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-	//	SmartDashboard.putString("Shooter", "Pulled Down");
-		Robot.kCubeShooter.stopShooterMotor();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		// this command is not interruptible
+		Robot.kElevatorManipulator.stopElevatorLiftMotor();
 	}
 }

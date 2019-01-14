@@ -16,9 +16,8 @@ import org.usfirst.frc.team1359.robot.subsystems.Aesthetics;
 import org.usfirst.frc.team1359.robot.subsystems.Camera;
 import org.usfirst.frc.team1359.robot.subsystems.Climber;
 import org.usfirst.frc.team1359.robot.subsystems.ArmManipulator;
-import org.usfirst.frc.team1359.robot.subsystems.CubeShooter;
+import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator;
 import org.usfirst.frc.team1359.robot.subsystems.PIDDriveSystem;
-import org.usfirst.frc.team1359.robot.subsystems.PneumaticsSystem;
 
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
@@ -27,8 +26,7 @@ public class Robot extends TimedRobot {
 	public static OI kOI;
 	public static final Climber kClimber = new Climber();
 	public static final ArmManipulator kArmManipulator = new ArmManipulator();
-	public static final CubeShooter kCubeShooter = new CubeShooter();
-	public static final PneumaticsSystem kPneumatics = new PneumaticsSystem();
+	public static final ElevatorManipulator kElevatorManipulator = new ElevatorManipulator();
 	public static final Camera kcamera = new Camera();
 	public static String AutonomousLeftOrRightPriority = "None";
 	public static String AutonomousMiddlePriority = "None";
@@ -73,8 +71,6 @@ public class Robot extends TimedRobot {
 		System.out.println("The 1359 Scalawags can win this match!  ");
 		CameraServer.getInstance().startAutomaticCapture();
 		driverStation = DriverStation.getInstance();
-		
-		Robot.kCubeShooter.setReadyToFire(true);
 		
        
 	}

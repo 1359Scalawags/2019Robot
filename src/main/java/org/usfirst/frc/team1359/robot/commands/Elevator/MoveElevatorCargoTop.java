@@ -1,18 +1,18 @@
-package org.usfirst.frc.team1359.robot.commands.shooter;
+package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
+import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorCargoHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class ShooterUnwind extends Command {
+public class MoveElevatorCargoTop extends Command {
 
-	public ShooterUnwind() {
-		super("ShooterUnwind");
-		requires(Robot.kCubeShooter);
+	public MoveElevatorCargoTop() {
+		super("MoveElevatorCargoTop");
+		requires(Robot.kElevatorManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		//setInterruptible(false);
@@ -24,21 +24,16 @@ public class ShooterUnwind extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kCubeShooter.unwindShooter();
+		Robot.kElevatorManipulator.moveElevatorCargo(elevatorCargoHeight.TOP);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-
-		return Robot.kCubeShooter.shooterIsUnwound();
+		return Robot.kElevatorManipulator.isUpMax(); // isToHeight also works
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		SmartDashboard.putString("Shooter", "Shooter Unwound");
-		Robot.kCubeShooter.stopShooterMotor();
-		Robot.kCubeShooter.setReadyToFire(true);
-		SmartDashboard.putString("Shooter", "Ready to fire");
 	}
 
 	// Called when another command which requires one or more of the same

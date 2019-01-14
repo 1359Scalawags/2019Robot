@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1359.robot.commands.shooter;
+package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
 
@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class PrepareToLaunchShooter extends CommandGroup {
+public class ChangeCommandsForButton extends CommandGroup {
 
-	public PrepareToLaunchShooter() {
-		super("PrepareToLaunchShooter");
-		requires(Robot.kCubeShooter);
-		addSequential(new PullShooter());
+	public ChangeCommandsForButton() {
+		super("ChangeCommandsForButton");
+		requires(Robot.kElevatorManipulator);
+		addSequential(new MoveElevatorHatchBottom());
 		// addSequential(new LockShooter()); Do not need this command
-		addSequential(new ShooterUnwind());
+		addSequential(new MoveElevatorCargoTop());
 		// Add Commands here:
 		// e.g. addSequential(new Command1());
 		// addSequential(new Command2());
