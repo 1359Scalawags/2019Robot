@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1359.robot.commands.drive;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.OI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
