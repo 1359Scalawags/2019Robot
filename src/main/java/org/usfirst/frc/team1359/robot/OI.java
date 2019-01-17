@@ -55,7 +55,6 @@ public class OI {
 		rockForwardButton.whenPressed(new MoveIntoDrivePosition());
 		rockBackwardButton.whenPressed(new MoveIntoClimbPosition());
 		reverseDriverButton.whenPressed(new SwitchDriveDirection());
-		
 		driveStraightEnable.whenPressed(new EnableDriveStraight());
 	}
 

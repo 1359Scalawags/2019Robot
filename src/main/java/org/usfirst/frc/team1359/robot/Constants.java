@@ -17,7 +17,11 @@ public class Constants {
 	public static final double cargoMiddleHeight = 2; // random value
 	public static final double cargoTopHeight = 2; // random value
 
-	public static final double anglePerValue = 200; // random value 
+	public static final double withinHeight = 1; // how close the elevator needs to be to target height (in inches)
+	public static final double valuePerAngle = 200; // random value 
+	public final static double potentiometerFullRange = 24; // random value
+	public static final double potentiometerOffset = 0; // random value
+	public static final int potentiometerChannel = 0; // random value
 
 	public static final boolean pressed = false;
 	public static final boolean notPressed = true;

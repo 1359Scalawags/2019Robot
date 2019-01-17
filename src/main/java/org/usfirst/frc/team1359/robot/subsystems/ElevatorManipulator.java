@@ -16,11 +16,11 @@ public class ElevatorManipulator extends Subsystem {
 	DigitalInput topLimit;
 	DigitalInput slideLeftLimit;
 	DigitalInput slideRightLimit;
-	Potentiometer elevatorHeight = new AnalogPotentiometer(0, 360, 0); // random values
 	boolean isHeight;
+	Potentiometer elevatorHeight;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
-	public static final int liftMotorMulitplier  = 1;
+	private static final int liftMotorMulitplier  = 1;
 
 	public enum elevatorHatchHeight{
 		BOTTOM,	BASE, MIDDLE, TOP
@@ -33,6 +33,7 @@ public class ElevatorManipulator extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public ElevatorManipulator(){
+		elevatorHeight = new AnalogPotentiometer(Constants.potentiometerChannel, Constants.potentiometerFullRange, Constants.potentiometerOffset);
 		slideMotor = new Talon(RobotMap.elevatorSlideMotor);
 		liftMotor = new Talon(RobotMap.elevatorLiftMotor);
 		bottomLimit = new DigitalInput(RobotMap.elevatorBottomLimit);
@@ -48,12 +49,8 @@ public class ElevatorManipulator extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	// public double getPotDegrees(){
-	// 	return elevatorHeight.get();
-	// }
-
 	public double getElevatorHeight(){
-		return elevatorHeight.get() * Constants.anglePerValue;
+		return elevatorHeight.get() ; // * Constants.valuePerAngle;
 	}
 
 	public void moveSlider(double speed) {
@@ -87,6 +84,10 @@ public class ElevatorManipulator extends Subsystem {
 		}
 	}
 
+	public void checkButtonForPress(){
+		
+	}
+
 	public void moveElevatorCargo(elevatorCargoHeight pos){
 		if(pos == elevatorCargoHeight.LOWER){
 			moveElevatorToHeight(Constants.cargoLowerHeight);
@@ -103,7 +104,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	public void moveElevatorToHeight(double height){
-		if(!(getElevatorHeight() == height) && !isUpMax() && !isDownMax()){
+		double distanceFromTarget = height - getElevatorHeight();
+		if(Math.abs(distanceFromTarget) > Constants.withinHeight && !isUpMax() && !isDownMax()){
 			if(getElevatorHeight() > height){
 				lowerElevator();
 			}
