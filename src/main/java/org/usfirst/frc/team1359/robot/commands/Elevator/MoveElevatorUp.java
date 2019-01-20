@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.ElevatorCargoHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
