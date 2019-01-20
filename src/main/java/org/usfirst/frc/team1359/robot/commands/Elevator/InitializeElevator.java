@@ -1,17 +1,17 @@
 package org.usfirst.frc.team1359.robot.commands.Elevator;
 
+import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorHatchHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveElevatorHatchMiddle extends Command {
+public class InitializeElevator extends Command {
 
-	public MoveElevatorHatchMiddle() {
-		super("MoveElevatorHatchMiddle");
+	public InitializeElevator() {
+		super("InitializeElevator");
 		requires(Robot.kElevatorManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -23,7 +23,8 @@ public class MoveElevatorHatchMiddle extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevatorHatch(elevatorHatchHeight.MIDDLE);
+		Robot.kElevatorManipulator.moveElevatorToHeight(Constants.hatchBaseHeight);
+		Robot.kElevatorManipulator.setIndex();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -12,11 +12,10 @@ import org.usfirst.frc.team1359.robot.commands.arm.BallIntake;
 import org.usfirst.frc.team1359.robot.commands.arm.MoveArmsDown;
 import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoClimbPosition;
 import org.usfirst.frc.team1359.robot.commands.climber.MoveIntoDrivePosition;
-import org.usfirst.frc.team1359.robot.commands.climber.UnLockCLimber;
 import org.usfirst.frc.team1359.robot.commands.drive.EnableDriveStraight;
-import org.usfirst.frc.team1359.robot.commands.Elevator.ChangeCommandsForButton;
-import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorHatchBottom;
-import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorCargoLower;
+import org.usfirst.frc.team1359.robot.commands.Elevator.SwitchHeightModes;
+import org.usfirst.frc.team1359.robot.commands.Elevator.ChangeHeightModes;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorDown;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -36,7 +35,7 @@ public class OI {
 	Button releaseCubeButton = new JoystickButton(assistPad, RobotMap.xboxB);
 	Button drawShooter = new JoystickButton(assistPad, RobotMap.lBumber);
 	Button releaseShooter = new JoystickButton(assistPad, RobotMap.rBumber);
-	Button enableClimberButton = new JoystickButton(assistPad, RobotMap.backBtn);
+	Button changeHeightModeButton = new JoystickButton(assistPad, RobotMap.backBtn);
 	Button rockForwardButton = new JoystickButton(assistPad, RobotMap.xboxY);
 	Button rockBackwardButton = new JoystickButton(assistPad, RobotMap.xboxA);
 	
@@ -44,14 +43,14 @@ public class OI {
 	Button driveStraightEnable = new JoystickButton(mainPad, RobotMap.xboxX);
 	Button extendClimberButton = new JoystickButton(mainPad, RobotMap.xboxY);
 	Button retractClimberButton = new JoystickButton(mainPad, RobotMap.xboxA);
+	Button raiseElevator = new JoystickButton(assistPad, RobotMap.upArrow); // 2019
 
 	public OI() {
-		drawShooter.whenPressed(new ChangeCommandsForButton());
+		drawShooter.whenPressed(new SwitchHeightModes());
 		grabCubeButton.whenPressed(new BallIntake());
 		releaseCubeButton.whenPressed(new MoveArmsDown());
-		drawShooter.whenPressed(new MoveElevatorHatchBottom());
-		releaseShooter.whenPressed(new MoveElevatorCargoLower());
-		enableClimberButton.whenPressed(new UnLockCLimber());
+		releaseShooter.whenPressed(new MoveElevatorDown());
+		changeHeightModeButton.whenPressed(new ChangeHeightModes());
 		rockForwardButton.whenPressed(new MoveIntoDrivePosition());
 		rockBackwardButton.whenPressed(new MoveIntoClimbPosition());
 		reverseDriverButton.whenPressed(new SwitchDriveDirection());
@@ -107,5 +106,9 @@ public class OI {
 	
 	public boolean getDriveStraightButton() {
 		return driveStraightEnable.get();
+	}
+
+	public boolean getRaiseElevator(){
+		return raiseElevator.get();
 	}
 }

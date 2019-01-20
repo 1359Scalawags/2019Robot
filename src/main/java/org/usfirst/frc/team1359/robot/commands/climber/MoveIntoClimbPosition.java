@@ -1,8 +1,7 @@
 package org.usfirst.frc.team1359.robot.commands.climber;
 
-import org.usfirst.frc.team1359.robot.Constants;
-
 import org.usfirst.frc.team1359.robot.Robot;
+import org.usfirst.frc.team1359.robot.subsystems.Climber.ClimbPosition;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,17 +23,12 @@ public class MoveIntoClimbPosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.kClimber.ClimberRotate(Constants.climbMotorSpeed);
+        Robot.kClimber.ClimberRotate(ClimbPosition.CLIMB);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Robot.kClimber.isClimbPosition()){
-            return true;
-        }
-       else{
-           return false;
-       }
+        return true;
     }
 
     // Called once after isFinished returns true
@@ -44,6 +38,5 @@ public class MoveIntoClimbPosition extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Robot.kClimber.stopClimber();
     }
 }

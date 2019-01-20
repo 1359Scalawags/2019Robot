@@ -18,20 +18,27 @@ public class ElevatorManipulator extends Subsystem {
 	DigitalInput slideRightLimit;
 	boolean isHeight;
 	Potentiometer elevatorHeight;
+	int index;
+	//int cargoIndex;
+	boolean heightMode;
+	boolean isInitialized;
+	boolean setCargoHeight;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 	private static final int liftMotorMulitplier  = 1;
 
-	public enum elevatorHatchHeight{
+	public enum ElevatorHatchHeight{
 		BOTTOM,	BASE, MIDDLE, TOP
 	}
 
-	public enum elevatorCargoHeight{
+	public enum ElevatorCargoHeight{
 		LOWER, MIDDLE, TOP
 	}
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	float cargoHeights[] = {Constants.cargoLowerHeight, Constants.cargoLowerHeight, Constants.cargoMiddleHeight, Constants.cargoTopHeight};
+
+	float hatchHeights[] = {Constants.hatchBottomHeight, Constants.hatchBaseHeight, Constants.hatchMiddleHeight, Constants.hatchTopHeight};
+
 	public ElevatorManipulator(){
 		elevatorHeight = new AnalogPotentiometer(Constants.potentiometerChannel, Constants.potentiometerFullRange, Constants.potentiometerOffset);
 		slideMotor = new Talon(RobotMap.elevatorSlideMotor);
@@ -41,6 +48,11 @@ public class ElevatorManipulator extends Subsystem {
 		slideLeftLimit =  new DigitalInput(RobotMap.elevatorSlideLeftLimit);
 		slideRightLimit =  new DigitalInput(RobotMap.elevatorSlideRightLimit);
 		isHeight = false;
+		index = -1;
+		//cargoIndex = -1;
+		isInitialized = false;
+		setCargoHeight = false;
+		heightMode = false; // false = Hatch, true = cargo
 	}
 
 	public void initDefaultCommand() {
@@ -48,6 +60,80 @@ public class ElevatorManipulator extends Subsystem {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
+
+	public void switchmodes(){
+		heightMode = !heightMode;
+	}
+
+	public void setIndex(){
+		index = 1;
+	}
+
+	// public void setIndexToHeight(){
+	// 	if(Math.abs(Constants.hatchBaseHeight - getElevatorHeight()) < Constants.withinHeight){
+	// 		index = 1;
+	// 	}
+	// 	else if(Math.abs(Constants.hatchBottomHeight - getElevatorHeight()) < Constants.withinHeight){
+	// 		index = 0;
+	// 	}
+	// 	else if(Math.abs(Constants.hatchMiddleHeight - getElevatorHeight()) < Constants.withinHeight){
+	// 		index = 2;
+	// 	}
+	// 	else if(Math.abs(Constants.hatchTopHeight - getElevatorHeight()) < Constants.withinHeight){
+	// 		index = 3;
+	// 	}
+	// 	else{
+	// 		moveElevatorToHeight(Constants.hatchBaseHeight);
+	// 	}
+	// }
+
+	// public void setCargoIndexToHeight(){
+	// 	if(!setCargoHeight){
+	// 	setCargoHeight = true;
+	// 	}
+	// 	else{
+	// 	}
+	// }
+
+	// public boolean isCargoSetToHeight(){
+	// 	return setCargoHeight;
+	// }
+
+	public float getCurrentHatchHeight(){
+		return hatchHeights[index];
+	}
+
+	public float getCurrentCargoHeight(){
+		return cargoHeights[index];
+	}
+
+	public void incrementHeight(){
+		index ++;
+		if(index > 3){
+			index = 3;
+		}
+	}
+
+	public void abateHeight(){
+		index --;
+		if(index < 0){
+			index = 0;
+		}
+	}
+
+	// public void incrementCargoHeight(){
+	// 	cargoIndex ++;
+	// 	if(cargoIndex > 2){
+	// 		cargoIndex = 2;
+	// 	}
+	// }
+
+	// public void abatecargoHeight(){
+	// 	cargoIndex --;
+	// 	if(cargoIndex < 0){
+	// 		cargoIndex = 0;
+	// 	}
+	// }
 
 	public double getElevatorHeight(){
 		return elevatorHeight.get() ; // * Constants.valuePerAngle;
@@ -66,17 +152,44 @@ public class ElevatorManipulator extends Subsystem {
 		}
 	}
 
-	public void moveElevatorHatch(elevatorHatchHeight pos){
-		if(pos == elevatorHatchHeight.BASE){
+	// public void moveElevatorHatch(elevatorHatchHeight pos){
+	// 	if(pos == elevatorHatchHeight.BASE){
+	// 		moveElevatorToHeight(Constants.hatchBaseHeight);
+	// 	}
+	// 	else if(pos == elevatorHatchHeight.MIDDLE){
+	// 		moveElevatorToHeight(Constants.hatchMiddleHeight);
+	// 	}
+	// 	else if(pos == elevatorHatchHeight.TOP){
+	// 		moveElevatorToHeight(Constants.hatchTopHeight);
+	// 	}
+	// 	else if(pos == elevatorHatchHeight.BOTTOM){
+	// 		moveElevatorToHeight(Constants.hatchBottomHeight);
+	// 	}
+	// 	else{
+	// 		stopElevatorLiftMotor();
+	// 	}
+	// }
+
+	public void moveElevator(){
+		if(heightMode == false){
+			moveElevatorHatch();
+		}
+		else{
+			moveElevatorCargo();
+		}
+	}
+
+	private void moveElevatorHatch(){
+		if(index == 1){
 			moveElevatorToHeight(Constants.hatchBaseHeight);
 		}
-		else if(pos == elevatorHatchHeight.MIDDLE){
+		else if(index == 2){
 			moveElevatorToHeight(Constants.hatchMiddleHeight);
 		}
-		else if(pos == elevatorHatchHeight.TOP){
+		else if(index == 3){
 			moveElevatorToHeight(Constants.hatchTopHeight);
 		}
-		else if(pos == elevatorHatchHeight.BOTTOM){
+		else if(index == 0){
 			moveElevatorToHeight(Constants.hatchBottomHeight);
 		}
 		else{
@@ -84,18 +197,17 @@ public class ElevatorManipulator extends Subsystem {
 		}
 	}
 
-	public void checkButtonForPress(){
-		
-	}
-
-	public void moveElevatorCargo(elevatorCargoHeight pos){
-		if(pos == elevatorCargoHeight.LOWER){
+	private void moveElevatorCargo(){
+		if(index == 0){
 			moveElevatorToHeight(Constants.cargoLowerHeight);
 		}
-		else if(pos == elevatorCargoHeight.MIDDLE){
+		else if(index == 1){
+			moveElevatorToHeight(Constants.cargoLowerHeight);
+		}
+		else if(index == 2){
 			moveElevatorToHeight(Constants.cargoMiddleHeight);
 		}
-		else if(pos == elevatorCargoHeight.TOP){
+		else if(index == 3){
 			moveElevatorToHeight(Constants.cargoTopHeight);
 		}
 		else{
@@ -123,11 +235,11 @@ public class ElevatorManipulator extends Subsystem {
 		return isHeight;
 	}
 
-	public void lowerElevator(){
+	private void lowerElevator(){
 		liftMotor.set(-(Constants.elevatorLiftSpeed) * liftMotorMulitplier);
 	}
 
-	public void raiseElevator(){
+	private void raiseElevator(){
 		liftMotor.set(Constants.elevatorLiftSpeed * liftMotorMulitplier);
 	}
 

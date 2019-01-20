@@ -4,7 +4,7 @@ import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
@@ -12,15 +12,19 @@ public class Climber extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	DigitalInput lowerLimit, upperLimit;
-	Talon pivotMotor;
+	//Talon pivotMotor;
 	boolean climberLocked;
+	Solenoid pivotLock;
 	//double speedChanger;
 
-	private final static int MotorMultiplier = 1; // change to -1 to reverse motor direction
+	public enum ClimbPosition{
+		DRIVE, CLIMB
+	}
 
 	public Climber() {
 
-		pivotMotor = new Talon(RobotMap.pivotMotor);
+		//pivotMotor = new Talon(RobotMap.pivotMotor);
+		pivotLock = new Solenoid(RobotMap.pivotLock);
 		lowerLimit = new DigitalInput(RobotMap.climbLowerLimit);
 		upperLimit = new DigitalInput(RobotMap.climbUpperLimit);
 		climberLocked = true;
@@ -37,21 +41,17 @@ public class Climber extends Subsystem {
 		return climberLocked;
 	}
 	
-	public void ClimberRotate(double speed) {
-		//speed = speedChanger;
-
+	public void ClimberRotate(ClimbPosition pos) {
 		if(climberLocked) {
-			pivotMotor.set(0);
 		}
 		else {
-			if(speed > 0 && !isClimbPosition()) {
-				pivotMotor.set(speed * MotorMultiplier);
+			if(!isClimbPosition() && pos == ClimbPosition.CLIMB) {
+				pivotLock.set(true); // true sets it to climb position
 			}
-			else if(speed < 0 && !isDrivePosition()) {
-				pivotMotor.set(speed * MotorMultiplier);
+			else if(!isDrivePosition() && pos == ClimbPosition.DRIVE) {
+				pivotLock.set(false);
 			}
 			else {
-				pivotMotor.set(0);
 			}
 		}
 	}
@@ -59,10 +59,6 @@ public class Climber extends Subsystem {
 	// public void switchSpeedDirection(){
 	// 	speedChanger = -(speedChanger);
 	// }
-
-	public void stopClimber() {
-		pivotMotor.set(0);
-	}
 
 	public boolean isClimbPosition() {
 		return (upperLimit.get() == Constants.pressed); // pressed is false
@@ -72,6 +68,4 @@ public class Climber extends Subsystem {
 		return (lowerLimit.get() == Constants.pressed);
 		
 	}
-	
-	
 }

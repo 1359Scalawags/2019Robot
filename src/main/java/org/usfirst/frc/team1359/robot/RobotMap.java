@@ -28,10 +28,14 @@ public class RobotMap {
 	public static final int rightEncoderB = 13;
 
 	public static final int elevatorHeightPot = 99; // 2019 pot
+	public static final int armRotator = 99; //arm solenoid
+	public static final int pivotLock = 99; // pivot climb solenoid
+	public static final int hatchPuncher = 99; // hatch push solenoid
+	public static final int armExtender = 99; // arm extend out solenoid
 
 	// motors
 	public static final int elevatorSlideMotor = 99; 
-	public static final int pivotMotor = 99; 
+	//public static final int pivotMotor = 99; 
 	public static final int rightBeltMotor = 99;
 	public static final int leftBeltMotor = 99;
 	public static final int rotateArmMotor = 99; 
@@ -50,6 +54,8 @@ public class RobotMap {
 	// gameController
 	public static final int mainController = 0;
 	public static final int assistController = 1;
+
+	public static final int upArrow = 99; // random
 
 	public static final int xboxA = 1; // liftCubeMiddle
 	public static final int xboxB = 2; // releaseCube
@@ -83,6 +89,7 @@ public class RobotMap {
 	public static final int climberbutton = 9;
 	public static final int liftcube90 = 10;
 	public static final int liftcube180 = 11;
+	public static final int raiseElevator = 99; //random value
 
 	// Extra
 	public static final int leonardo = 0;

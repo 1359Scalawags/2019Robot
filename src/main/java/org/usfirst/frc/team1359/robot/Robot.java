@@ -137,7 +137,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Shooter", "Ready to Fire");
 		SmartDashboard.putBoolean("Climber Locked", true);
 		kPIDDriveSystem.resetEncoders();
-		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}

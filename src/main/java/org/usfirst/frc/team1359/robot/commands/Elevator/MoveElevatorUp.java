@@ -1,17 +1,17 @@
 package org.usfirst.frc.team1359.robot.commands.Elevator;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorCargoHeight;
+import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.ElevatorCargoHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveElevatorCargoMiddle extends Command {
+public class MoveElevatorUp extends Command {
 
-	public MoveElevatorCargoMiddle() {
-		super("MoveElevatorCargoMiddle");
+	public MoveElevatorUp() {
+		super("MoveElevatorCargoUp");
 		requires(Robot.kElevatorManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -20,11 +20,12 @@ public class MoveElevatorCargoMiddle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.kElevatorManipulator.incrementHeight();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevatorCargo(elevatorCargoHeight.MIDDLE);
+		Robot.kElevatorManipulator.moveElevator();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

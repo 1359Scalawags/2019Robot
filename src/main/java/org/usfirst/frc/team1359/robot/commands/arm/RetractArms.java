@@ -1,18 +1,17 @@
-package org.usfirst.frc.team1359.robot.commands.Elevator;
+package org.usfirst.frc.team1359.robot.commands.arm;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorHatchHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveElevatorHatchBase extends Command {
+public class RetractArms extends Command {
 
-	public MoveElevatorHatchBase() {
-		super("MoveElevatorHatchBase");
-		requires(Robot.kElevatorManipulator);
+	public RetractArms() {
+		super("RetractArms");
+		requires(Robot.kArmManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -23,12 +22,14 @@ public class MoveElevatorHatchBase extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevatorHatch(elevatorHatchHeight.BASE);
+        Robot.kArmManipulator.extendHatchPuncher();
+		Robot.kArmManipulator.retractArms();
+		Robot.kArmManipulator.retractHatchPuncher();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	return	Robot.kElevatorManipulator.isToHeight();
+		return true;
 	}
 
 	// Called once after isFinished returns true
@@ -38,6 +39,5 @@ public class MoveElevatorHatchBase extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.kElevatorManipulator.stopElevatorLiftMotor();
 	}
 }

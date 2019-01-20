@@ -8,18 +8,18 @@ public class Constants {
 	public static final double moveBeltSpeed = 2; // random value 
 	public static final double elevatorLiftSpeed = 2; // random value
 
-	public static final double hatchBaseHeight = 2; // random value
-	public static final double hatchMiddleHeight = 2; // random value
-	public static final double hatchTopHeight = 2; // random value
-	public static final double hatchBottomHeight = 2; // random value
+	public static final float hatchBaseHeight = 19f; // inches
+	public static final float hatchMiddleHeight = 47f; // inches
+	public static final float hatchTopHeight = 75f; // inches
+	public static final float hatchBottomHeight = 2f; // random value
 
-	public static final double cargoLowerHeight = 2; // random value
-	public static final double cargoMiddleHeight = 2; // random value
-	public static final double cargoTopHeight = 2; // random value
+	public static final float cargoLowerHeight = 27.5f; // inches
+	public static final float cargoMiddleHeight = 55.5f; // inches
+	public static final float cargoTopHeight = 83.5f; // inches
 
-	public static final double withinHeight = 1; // how close the elevator needs to be to target height (in inches)
+	public static final double withinHeight = 2; // how close the elevator needs to be to target height (in inches)
 	public static final double valuePerAngle = 200; // random value 
-	public final static double potentiometerFullRange = 24; // random value
+	public final static double potentiometerFullRange = 83.5; // inches
 	public static final double potentiometerOffset = 0; // random value
 	public static final int potentiometerChannel = 0; // random value
 

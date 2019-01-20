@@ -1,21 +1,19 @@
-package org.usfirst.frc.team1359.robot.commands.Elevator;
+package org.usfirst.frc.team1359.robot.commands.arm;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator.elevatorCargoHeight;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveElevatorCargoTop extends Command {
+public class ExtendArms extends Command {
 
-	public MoveElevatorCargoTop() {
-		super("MoveElevatorCargoTop");
-		requires(Robot.kElevatorManipulator);
+	public ExtendArms() {
+		super("ExtendArmsOut");
+		requires(Robot.kArmManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		//setInterruptible(false);
 	}
 
 	// Called just before this Command runs the first time
@@ -24,12 +22,12 @@ public class MoveElevatorCargoTop extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevatorCargo(elevatorCargoHeight.TOP);
+        Robot.kArmManipulator.extendArms();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.kElevatorManipulator.isUpMax(); // isToHeight also works
+		return true;
 	}
 
 	// Called once after isFinished returns true
@@ -39,6 +37,5 @@ public class MoveElevatorCargoTop extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		// cannot be interrupted
 	}
 }
