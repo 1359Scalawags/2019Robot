@@ -3,6 +3,7 @@ package org.usfirst.frc.team1359.robot.subsystems;
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ArmManipulator extends Subsystem {
 
 	//DigitalInput bottomLimit, topLimit;
+	DigitalInput ballIn;
 	Talon leftBeltMotor , rightBeltMotor; // , rotateArmMotor;
 	Solenoid rotateArm;
 	Solenoid hatchPuncher;
@@ -29,6 +31,7 @@ public class ArmManipulator extends Subsystem {
 		
 	//	bottomLimit = new DigitalInput(RobotMap.armBottomLimit);
 	//	topLimit = new DigitalInput(RobotMap.armTopLimit);
+		ballIn = new DigitalInput(RobotMap.ballInLimit);
 		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
 		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
 		rotateArm = new Solenoid(RobotMap.armRotator);
@@ -43,20 +46,11 @@ public class ArmManipulator extends Subsystem {
 	}
 	
 	public void moveBeltsIn() {
-		// if(beltsLocked){
-		// 	stopBelts();
-		// }
-		// else{
-		// 	leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
-		// 	rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
-		// }
-		
 		 	leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
 		 	rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
 	}
 
 	public void moveBeltsOut(){
-		
 		 	leftBeltMotor.set(-(Constants.moveBeltSpeed * leftBeltMotorMultiplier));
 		 	rightBeltMotor.set(Constants.moveBeltSpeed * rightBeltMotorMultiplier);
 	}
@@ -99,6 +93,10 @@ public class ArmManipulator extends Subsystem {
 	public void stopBelts() {
 		leftBeltMotor.set(0);
 		rightBeltMotor.set(0);
+	}
+
+	public boolean isBallIn(){
+		return ballIn.get() == Constants.pressed;
 	}
 
 	// public void unlockBelts(){

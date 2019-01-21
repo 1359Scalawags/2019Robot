@@ -20,19 +20,20 @@ public class ElevatorManipulator extends Subsystem {
 	Potentiometer elevatorHeight;
 	int index;
 	//int cargoIndex;
-	boolean heightMode;
+	//boolean heightMode;
+	HeightMode heightMode;
 	boolean isInitialized;
 	boolean setCargoHeight;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 	private static final int liftMotorMulitplier  = 1;
 
-	public enum ElevatorHatchHeight{
-		BOTTOM,	BASE, MIDDLE, TOP
-	}
+	// public enum ElevatorHatchHeight{
+	// 	BOTTOM,	BASE, MIDDLE, TOP
+	// }
 
-	public enum ElevatorCargoHeight{
-		LOWER, MIDDLE, TOP
+	public enum HeightMode{
+		HATCH, CARGO
 	}
 
 	float cargoHeights[] = {Constants.cargoLowerHeight, Constants.cargoLowerHeight, Constants.cargoMiddleHeight, Constants.cargoTopHeight};
@@ -52,7 +53,8 @@ public class ElevatorManipulator extends Subsystem {
 		//cargoIndex = -1;
 		isInitialized = false;
 		setCargoHeight = false;
-		heightMode = false; // false = Hatch, true = cargo
+		heightMode = HeightMode.HATCH;
+		//heightMode = false; // false = Hatch, true = cargo
 	}
 
 	public void initDefaultCommand() {
@@ -61,9 +63,18 @@ public class ElevatorManipulator extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	public void switchmodes(){
-		heightMode = !heightMode;
+	public void switchModes(){
+		if(heightMode == HeightMode.HATCH){
+			heightMode = HeightMode.CARGO;
+		}
+		else{
+			heightMode =  HeightMode.HATCH;
+		}
 	}
+
+	// public void switchmodes(){
+	// 	heightMode = !heightMode;
+	// }
 
 	public void setIndex(){
 		index = 1;
@@ -171,7 +182,7 @@ public class ElevatorManipulator extends Subsystem {
 	// }
 
 	public void moveElevator(){
-		if(heightMode == false){
+		if(heightMode == (HeightMode.HATCH)){
 			moveElevatorHatch();
 		}
 		else{

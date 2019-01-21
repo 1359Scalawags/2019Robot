@@ -42,7 +42,7 @@ public class RobotMap {
 	public static final int elevatorLiftMotor = 99;
 
 	// Limit Switches
-	public static final int armBottomLimit = 99; 
+	public static final int ballInLimit = 99; 
 	public static final int armTopLimit = 99; 
 	public static final int elevatorBottomLimit = 99; 
 	public static final int elevatorToplimit = 99; 
@@ -55,7 +55,10 @@ public class RobotMap {
 	public static final int mainController = 0;
 	public static final int assistController = 1;
 
-	public static final int upArrow = 99; // random
+	public static final int upArrow = 11; // random
+	public static final int downArrow = 12; //random
+	public static final int leftArrow = 13; //random
+	public static final int rightArrow = 14;//random
 
 	public static final int xboxA = 1; // liftCubeMiddle
 	public static final int xboxB = 2; // releaseCube
@@ -79,17 +82,17 @@ public class RobotMap {
 	// JoyStick3
 	public static final int joystick3 = 2;
 
-	public static final int drawShooter = 2;
-	public static final int releaseShooter = 3;
-	public static final int grabcube = 4;
-	public static final int releasecube = 5;
-	public static final int extendbutton = 6;
-	public static final int retractbutton = 7;
-	public static final int lowercube = 8;
-	public static final int climberbutton = 9;
-	public static final int liftcube90 = 10;
-	public static final int liftcube180 = 11;
-	public static final int raiseElevator = 99; //random value
+	// public static final int drawShooter = 2;
+	// public static final int releaseShooter = 3;
+	// public static final int grabcube = 4;
+	// public static final int releasecube = 5;
+	// public static final int extendbutton = 6;
+	// public static final int retractbutton = 7;
+	// public static final int lowercube = 8;
+	// public static final int climberbutton = 9;
+	// public static final int liftcube90 = 10;
+	// public static final int liftcube180 = 11;
+	// public static final int raiseElevator = 99; //random value
 
 	// Extra
 	public static final int leonardo = 0;

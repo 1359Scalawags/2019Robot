@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ChangeHeightModes extends CommandGroup {
 
-	boolean initElevator = false;
+	static boolean initElevator = false;
 
 	public ChangeHeightModes() {
 		super("ChangeHeightModes");
