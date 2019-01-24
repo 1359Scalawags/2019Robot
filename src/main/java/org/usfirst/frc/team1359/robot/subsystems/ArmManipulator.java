@@ -46,8 +46,13 @@ public class ArmManipulator extends Subsystem {
 	}
 	
 	public void moveBeltsIn() {
-		 	leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
-		 	rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+		if(!isBallIn()){
+			leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
+			rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+		}
+		else{
+			stopBelts();
+		}
 	}
 
 	public void moveBeltsOut(){
