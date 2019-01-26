@@ -39,7 +39,7 @@ public class AutonomousRightPosition extends CommandGroup {
 			}
 			else {
 			addSequential(new BallIntake());
-			addSequential(new DriveStraightDistance(Constants.distanceToSwitchCenterline, Constants.autoDriveSpeed)); // random value in MoveForward()
+			addSequential(new DriveStraightDistance(Constants.distanceToFrontCargoShip, Constants.autoDriveSpeed)); // random value in MoveForward()
 			addSequential(new TurnByAngle(-90));
 			addSequential(new DriveStraightDistance(Constants.approachSwitchEnd, Constants.autoDriveSpeed*.75));
 			addSequential(new StopBelts());  
@@ -51,7 +51,7 @@ public class AutonomousRightPosition extends CommandGroup {
 		} else if (scalePos == 'R' && switchPosNear == 'R') { // determined by smartDashboard
 			if (Robot.AutonomousLeftOrRightPriority.equals("Switch")) { // drop cube in switch
 				addSequential(new BallIntake());
-				addSequential(new DriveStraightDistance(Constants.distanceToSwitchCenterline, Constants.autoDriveSpeed)); // random value in MoveForward()
+				addSequential(new DriveStraightDistance(Constants.distanceToFrontCargoShip, Constants.autoDriveSpeed)); // random value in MoveForward()
 				addSequential(new TurnByAngle(-90));
 				addSequential(new StopBelts()); // CHANGE THIS
 		//		addSequential(new MovesArmDown());

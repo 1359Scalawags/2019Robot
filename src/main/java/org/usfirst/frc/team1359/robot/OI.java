@@ -22,6 +22,7 @@ import org.usfirst.frc.team1359.robot.commands.drive.EnableDriveStraight;
 import org.usfirst.frc.team1359.robot.commands.Elevator.ChangeHeightModes;
 import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorDown;
 import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorUp;
+import org.usfirst.frc.team1359.robot.commands.arm.ExtendAndRetractArms;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -43,8 +44,9 @@ public class OI {
 	Button releaseBall = new JoystickButton(assistPad, RobotMap.rBumber);
 	Button moveArmsUp = new JoystickButton(assistPad, RobotMap.xboxY);
 	Button moveArmsDown = new JoystickButton(assistPad, RobotMap.xboxA);
-	Button extendArms = new JoystickButton(assistPad, RobotMap.xboxB);
-	Button retractArms = new JoystickButton(assistPad, RobotMap.xboxX);
+	//Button extendArms = new JoystickButton(assistPad, RobotMap.xboxB);
+	//Button retractArms = new JoystickButton(assistPad, RobotMap.xboxX);
+	Button extendAndRetractArms = new JoystickButton(assistPad, RobotMap.xboxB);
 	Button raiseElevator = new JoystickButton(assistPad, RobotMap.upArrow);
 	Button lowerElevator = new JoystickButton(assistPad, RobotMap.downArrow);
 	
@@ -57,8 +59,9 @@ public class OI {
 	public OI() {
 		moveArmsDown.whenPressed(new MoveArmsDown());
 		moveArmsUp.whenPressed(new MoveArmsUp());
-		extendArms.whenPressed(new ExtendArms());
-		retractArms.whenPressed(new RetractArms());
+		//extendArms.whenPressed(new ExtendArms());
+		//retractArms.whenPressed(new RetractArms());
+		extendAndRetractArms.whenPressed(new ExtendAndRetractArms());
 		stopBelts.whenPressed(new StopBelts());
 		IntakeBall.whenPressed(new BallIntake());
 		enableClimbing.whenPressed(new UnLockCLimber());

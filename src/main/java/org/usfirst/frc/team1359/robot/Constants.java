@@ -56,7 +56,7 @@ public class Constants {
 	public static final double gyroPID_D = 0.05;
 	
 	// autonomous
-	public static final double distanceToSwitchCenterline = 12; 
+	public static final double distanceToFrontCargoShip = 0; 
 	public static final double distanceToScaleCenterline = 23;
 	public static final double distanceToFirstLine = 10;
 	public static final double approachScaleEnd = -1.4;
