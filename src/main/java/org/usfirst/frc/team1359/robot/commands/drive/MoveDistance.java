@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveDistance extends Command {
 
 	private double m_startDistance;
-	private double m_remainingDistance;
+	//private double m_remainingDistance;
 	private double m_deltaDistance;
-	private double m_motorSpeed = 0;
+	//private double m_motorSpeed = 0;
 	private boolean m_direction;
 
 	public MoveDistance(double distance, boolean direction) {
