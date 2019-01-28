@@ -27,29 +27,29 @@ public class RobotMap {
 	public static final int rightEncoderA = 12;
 	public static final int rightEncoderB = 13;
 
-	public static final int elevatorHeightPot = 99; // 2019 pot
-	public static final int armRotator = 99; //arm solenoid
-	public static final int pivotLock = 99; // pivot climb solenoid
-	public static final int hatchPuncher = 99; // hatch push solenoid
-	public static final int armExtender = 99; // arm extend out solenoid
+	public static final int elevatorHeightPot = 0; // 2019 pot
+	public static final int armRotator = 0; //arm solenoid
+	public static final int pivotLock = 1; // pivot climb solenoid
+	public static final int hatchPuncher = 2; // hatch push solenoid
+	public static final int armExtender = 3; // arm extend out solenoid
 
 	// motors
-	public static final int elevatorSlideMotor = 99; 
+	public static final int elevatorSlideMotor = 4; 
 	//public static final int pivotMotor = 99; 
-	public static final int rightBeltMotor = 99;
-	public static final int leftBeltMotor = 99;
-	public static final int rotateArmMotor = 99; 
-	public static final int elevatorLiftMotor = 99;
+	public static final int rightBeltMotor = 5;
+	public static final int leftBeltMotor = 6;
+	public static final int rotateArmMotor = 7; 
+	public static final int elevatorLiftMotor = 8;
 
 	// Limit Switches
-	public static final int ballInLimit = 99; 
-	public static final int armTopLimit = 99; 
-	public static final int elevatorBottomLimit = 99; 
-	public static final int elevatorToplimit = 99; 
-	public static final int climbUpperLimit = 99;
-	public static final int climbLowerLimit = 99; 
-	public static final int elevatorSlideLeftLimit = 99; 
-	public static final int elevatorSlideRightLimit = 99; 
+	public static final int ballInLimit = 0; 
+	public static final int armTopLimit = 1; 
+	public static final int elevatorBottomLimit = 2; 
+	public static final int elevatorToplimit = 3; 
+	public static final int climbUpperLimit = 4;
+	public static final int climbLowerLimit = 5; 
+	public static final int elevatorSlideLeftLimit = 6; 
+	public static final int elevatorSlideRightLimit = 7; 
 
 	// gameController
 	public static final int mainController = 0;
