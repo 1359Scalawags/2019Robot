@@ -18,10 +18,8 @@ import org.usfirst.frc.team1359.robot.subsystems.Climber;
 import org.usfirst.frc.team1359.robot.subsystems.ArmManipulator;
 import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator;
 import org.usfirst.frc.team1359.robot.subsystems.PIDDriveSystem;
-import org.usfirst.frc.team1359.robot.Vision;
-import edu.wpi.first.networktables.NetworkTable;
+import org.usfirst.frc.team1359.robot.subsystems.Network;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
@@ -32,7 +30,7 @@ public class Robot extends TimedRobot {
 	public static final ArmManipulator kArmManipulator = new ArmManipulator();
 	public static final ElevatorManipulator kElevatorManipulator = new ElevatorManipulator();
 	public static final Camera kcamera = new Camera();
-	public static final Vision kVision = new Vision();
+	public static final Network kNetwork = new Network();
 	public static String AutonomousLeftOrRightPriority = "None";
 	public static String AutonomousMiddlePriority = "None";
 	Command m_autonomousCommand;
@@ -55,13 +53,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		kOI = new OI();
-
-		// vision
-		NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable xTable = inst.getTable("datatable");
-        NetworkTable targetDistanceTable = inst.getTable("dataTable");
-        xEntry = xTable.getEntry("X");
-        distance =targetDistanceTable.getEntry("distance");
+		// // vision
+		// NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        // NetworkTable xTable = inst.getTable("datatable");
+        // NetworkTable targetDistanceTable = inst.getTable("dataTable");
+        // xEntry = xTable.getEntry("X");
+        // distance =targetDistanceTable.getEntry("distance");
 		
 		/*
 		 * setDefaultOption replaced addDefault
@@ -168,11 +165,13 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Oh No It's Match Time!", driverStation.getMatchTime());
 
-		// vision
-		xEntry.setDouble(x);
-        distance.setDouble(distanceFromTarget);
-        x += .5; // random values
-        distanceFromTarget += 1; // random values
+		kNetwork.setTablePeriodic();
+		kNetwork.getTableValues();
+		// // vision
+		// xEntry.setDouble(x);
+        // distance.setDouble(distanceFromTarget);
+        // x += .5; // random values
+        // distanceFromTarget += 1; // random values
 	}
 
 	/**
