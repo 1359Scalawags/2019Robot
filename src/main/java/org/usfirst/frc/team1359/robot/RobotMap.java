@@ -43,11 +43,11 @@ public class RobotMap {
 
 	// Limit Switches
 	public static final int ballInLimit = 0; 
-	public static final int armTopLimit = 1; 
+	//public static final int armTopLimit = 1; 
 	public static final int elevatorBottomLimit = 2; 
 	public static final int elevatorToplimit = 3; 
-	public static final int climbUpperLimit = 4;
-	public static final int climbLowerLimit = 5; 
+	//public static final int climbUpperLimit = 4;
+	//public static final int climbLowerLimit = 5; 
 	public static final int elevatorSlideLeftLimit = 6; 
 	public static final int elevatorSlideRightLimit = 7; 
 

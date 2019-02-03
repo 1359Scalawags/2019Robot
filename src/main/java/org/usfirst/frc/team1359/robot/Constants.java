@@ -3,6 +3,10 @@ package org.usfirst.frc.team1359.robot;
 public class Constants {
 
 	//2019 constants
+	public static final float withinAngleToTarget = 4f;
+	public static final double withinDistanceToTarget = 2; // random value
+	public static final float withinPercentageToCenter = 3.5f; // random value
+	public static final double slideMotorSpeed = 2; //random value
 	public static final double climbMotorSpeed = 2; // random value 
 	public static final double rotateArmSpeed = 2; // random value 
 	public static final double moveBeltSpeed = 2; // random value 
@@ -56,6 +60,9 @@ public class Constants {
 	public static final double gyroPID_D = 0.05;
 	
 	// autonomous
+	public static final float distanceToRocket = 10; // random value
+	public static final float distanceOffTier2 = 3; // random value
+	public static final double visionSpeed = 2; // random value
 	public static final double distanceToFrontCargoShip = 0; 
 	public static final double distanceToScaleCenterline = 23;
 	public static final double distanceToFirstLine = 10;

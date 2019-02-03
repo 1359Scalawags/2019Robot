@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1359.robot.commands.autonomous;
 
-import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;

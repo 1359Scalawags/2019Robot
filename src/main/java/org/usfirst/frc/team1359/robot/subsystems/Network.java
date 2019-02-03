@@ -11,44 +11,61 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Network extends Subsystem{
     NetworkTableEntry xEntry;
     NetworkTableEntry distance;
-    double x;
+    NetworkTableEntry angle;
+    // not needed in final build
+    private double x;
+    private double distancevalue;
+    // needed in final build
+    float xPercentage;
+    float angleAtTarget;
     double distanceFromTarget;
     
     public Network(){
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable xTable = inst.getTable("xTable");
-        NetworkTable targetDistanceTable = inst.getTable("dataTable");
+        NetworkTable xTable = inst.getTable("XTable");
+        NetworkTable targetDistanceTable = inst.getTable("DistanceTable");
         xEntry = xTable.getEntry("X");
-        distance =targetDistanceTable.getEntry("distance");
-        x = 0; // random values
-        distanceFromTarget = 20; // random values
+        distance = targetDistanceTable.getEntry("DistanceFromTarget");
+        angle = targetDistanceTable.getEntry("AngleFromTarget");
+        //  x = 0; // random values
+        // distanceFromTarget = 20; // random values
     }
 
     public void initDefaultCommand(){
 
     }
 
-    public void getTableValues(){
-        double xValue = xEntry.getDouble(0);
-        double distanceValue = distance.getDouble(0);
-        System.out.println("##############################################"+xValue);
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+distanceValue);
+    public double returnDistanceFromTarget(){
+        return distanceFromTarget;
     }
 
+    public float returnAngleFromTarget(){
+        return angleAtTarget;
+    }
+
+    public void getTableValues(){
+        xPercentage = (float)xEntry.getDouble(0);
+        distanceFromTarget = distance.getDouble(0);
+        angleAtTarget = (float)angle.getDouble(0);
+        System.out.println("##############################################"+xPercentage);
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+distancevalue);
+    }
+
+    // not needed in final build
     public void setTablePeriodic(){
         xEntry.setDouble(x);
-        distance.setDouble(distanceFromTarget);
+        distance.setDouble(distancevalue);
         if(x <= 1000){
             x += 1; // random values
         }
         else{
             x = 0;
         }
-        if(distanceFromTarget <= 1000){
-            distanceFromTarget += 1; // random values
+        if(distancevalue <= 1000){
+            distancevalue += 1; // random values
         }
         else{
-            distanceFromTarget = 0;
+            distancevalue = 0;
         }
     }
 

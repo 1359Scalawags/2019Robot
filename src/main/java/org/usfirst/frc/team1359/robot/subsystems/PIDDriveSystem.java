@@ -8,12 +8,10 @@ import org.usfirst.frc.team1359.robot.commands.drive.DriveWithJoysticks;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -93,6 +91,17 @@ public class PIDDriveSystem extends Subsystem {
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveWithJoysticks());
+	}
+
+	public void driveForwardVision(double speed){
+		final double scale = .01;
+		double leftSpeed;
+		double rightSpeed;
+		double headingError = getAngle();
+		
+		leftSpeed =Utilities.Clamp(Math.abs(speed) - headingError * scale, -Constants.maxMotorSpeed, Constants.maxMotorSpeed);
+		rightSpeed = Utilities.Clamp(Math.abs(speed) + headingError * scale, -Constants.maxMotorSpeed, Constants.maxMotorSpeed);
+		tankDrive(leftSpeed, rightSpeed);		
 	}
 	
 	public void driveForward(double speed, double targetHeading) {

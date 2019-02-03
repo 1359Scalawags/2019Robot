@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1359.robot.subsystems;
 
 import org.usfirst.frc.team1359.robot.Constants;
+import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -24,6 +25,9 @@ public class ElevatorManipulator extends Subsystem {
 	HeightMode heightMode;
 	boolean isInitialized;
 	boolean setCargoHeight;
+	float averagePercentageFromCenter;
+	private double sliderSpeed;
+	private boolean isAtTarget;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 	private static final int liftMotorMulitplier  = 1;
@@ -53,14 +57,13 @@ public class ElevatorManipulator extends Subsystem {
 		//cargoIndex = -1;
 		isInitialized = false;
 		setCargoHeight = false;
+		isAtTarget = false;
 		heightMode = HeightMode.HATCH;
+		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier; 
 		//heightMode = false; // false = Hatch, true = cargo
 	}
 
 	public void initDefaultCommand() {
-	
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
 	}
 
 	public void switchModes(){
@@ -150,17 +153,32 @@ public class ElevatorManipulator extends Subsystem {
 		return elevatorHeight.get() ; // * Constants.valuePerAngle;
 	}
 
-	public void moveSlider(double speed) {
-		speed = speed * slideMotorMultiplier;
-		if(speed > 0 && !isRightMax()){
-			slideMotor.set(speed);
+	public boolean isAtCenterTarget(){
+		return isAtTarget;
+	}
+
+	public void moveSlider() {
+		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
+		if(averagePercentageFromCenter < Constants.withinPercentageToCenter){
+			slideMotor.set(sliderSpeed);
 		}
-		else if(speed < 0 && !isLeftMax()){
-			slideMotor.set(speed);
+		else if(averagePercentageFromCenter > Constants.withinPercentageToCenter){
+			slideMotor.set(-sliderSpeed);
 		}
 		else{
 			stopElevatorSlideMotor();
+			isAtTarget = true;
 		}
+		// speed = speed * slideMotorMultiplier;
+		// if(speed > 0 && !isRightMax()){
+		// 	slideMotor.set(speed);
+		// }
+		// else if(speed < 0 && !isLeftMax()){
+		// 	slideMotor.set(speed);
+		// }
+		// else{
+		// 	stopElevatorSlideMotor();
+		// }
 	}
 
 	// public void moveElevatorHatch(elevatorHatchHeight pos){

@@ -165,7 +165,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Oh No It's Match Time!", driverStation.getMatchTime());
 
-		kNetwork.setTablePeriodic();
+		//kNetwork.setTablePeriodic();
 		kNetwork.getTableValues();
 		// // vision
 		// xEntry.setDouble(x);

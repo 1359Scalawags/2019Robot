@@ -2,8 +2,6 @@ package org.usfirst.frc.team1359.robot.commands.autonomous;
 
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.RobotMap;
-import org.usfirst.frc.team1359.robot.Utilities;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,8 +13,6 @@ public class TurnByAngle extends Command {
 	private double m_startAngle;
 	private double m_deltaAngle;
 	private double m_angleRemaining;
-	private final double m_turnRateMultiplier = 0.75;
-	private double m_MotorSpeed = 0;
 
 	public TurnByAngle(double angle) {
 		super("TurnByAngle");

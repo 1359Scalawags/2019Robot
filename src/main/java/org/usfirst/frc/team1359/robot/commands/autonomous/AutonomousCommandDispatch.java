@@ -12,19 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutonomousCommandDispatch extends CommandGroup {
 
-	private char switchPosNear;
-	private char switchPosFar;
-	private char scalePos;
 	private DriverStation.Alliance alliance;
-	private String userPriority;
 	private String autonOverride;
 	private AutoModes autoMode;
 
 	public enum AutoModes {
 		left,
 		right,
-		middle,
-		other
+		middle
 	}
 
 	public AutonomousCommandDispatch(String override) {
@@ -33,9 +28,6 @@ public class AutonomousCommandDispatch extends CommandGroup {
 		DriverStation driverStation = DriverStation.getInstance();
 
 		alliance = driverStation.getAlliance();
-		switchPosNear = driverStation.getGameSpecificMessage().charAt(0);
-		switchPosFar = driverStation.getGameSpecificMessage().charAt(2);
-		scalePos = driverStation.getGameSpecificMessage().charAt(1);
 		autonOverride = override;
 		if(autonOverride.equals(Constants.autoModeLeft)) {
 			autoMode = AutoModes.left;
@@ -73,20 +65,5 @@ public class AutonomousCommandDispatch extends CommandGroup {
 		} else {
 
 		}
-		// Add Commands here:
-		// e.g. addSequential(new Command1());
-		// addSequential(new Command2());
-		// these will run in order.
-		// To run multiple commands at the same time,
-		// use addParallel()
-		// e.g. addParallel(new Command1());
-		// addSequential(new Command2());
-		// Command1 and Command2 will run in parallel.
-
-		// A command group will require all of the subsystems that each member
-		// would require.
-		// e.g. if Command1 requires chassis, and Command2 requires arm,
-		// a CommandGroup containing them would require both the chassis and the
-		// arm.
 	}
 }
