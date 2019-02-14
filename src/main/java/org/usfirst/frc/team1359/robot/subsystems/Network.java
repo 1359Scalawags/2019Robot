@@ -17,7 +17,7 @@ public class Network extends Subsystem{
     private double distancevalue;
     // needed in final build
     float xPercentage;
-    float angleAtTarget;
+    int angleAtTarget;
     double distanceFromTarget;
     
     public Network(){
@@ -39,14 +39,14 @@ public class Network extends Subsystem{
         return distanceFromTarget;
     }
 
-    public float returnAngleFromTarget(){
+    public int returnAngleFromTarget(){
         return angleAtTarget;
     }
 
     public void getTableValues(){
         xPercentage = (float)xEntry.getDouble(0);
         distanceFromTarget = distance.getDouble(0);
-        angleAtTarget = (float)angle.getDouble(0);
+        angleAtTarget = (int)angle.getDouble(0);
         System.out.println("##############################################"+xPercentage);
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+distancevalue);
     }

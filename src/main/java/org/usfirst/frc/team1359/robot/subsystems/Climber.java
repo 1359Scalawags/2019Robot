@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1359.robot.subsystems;
 
-import org.usfirst.frc.team1359.robot.Constants;
+//import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+//import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

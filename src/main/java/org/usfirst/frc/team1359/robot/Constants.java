@@ -5,7 +5,7 @@ public class Constants {
 	//2019 constants
 	public static final float withinAngleToTarget = 4f;
 	public static final double withinDistanceToTarget = 2; // random value
-	public static final float withinPercentageToCenter = 3.5f; // random value
+	public static final float withinPercentageToCenter = 5; // percentage
 	public static final double slideMotorSpeed = 2; //random value
 	public static final double climbMotorSpeed = 2; // random value 
 	public static final double rotateArmSpeed = 2; // random value 
