@@ -160,14 +160,14 @@ public class ElevatorManipulator extends Subsystem {
 		return isAtTarget;
 	}
 
-	public void moveSlider() {
+	public void moveSlider(/*double speed*/) {
 		
 		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
-		if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter) && !isRightMax()){
-			slideMotor.set(sliderSpeed);
-		}
-		else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter) && !isLeftMax()){
+		if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter) && !isLeftMax()){
 			slideMotor.set(-sliderSpeed);
+		}
+		else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter) && !isRightMax()){
+			slideMotor.set(sliderSpeed);
 		}
 		else{
 			stopElevatorSlideMotor();

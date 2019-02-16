@@ -24,11 +24,13 @@ public class MoveElevatorSlider extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.kElevatorManipulator.moveSlider();
+		//Robot.kElevatorManipulator.moveSlider(Robot.kOI.getSliderStick());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return Robot.kElevatorManipulator.isAtCenterTarget();
+		// return false;
 	}
 
 	// Called once after isFinished returns true
