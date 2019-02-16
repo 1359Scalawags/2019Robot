@@ -52,7 +52,7 @@ public class OI {
 	Button raiseElevator = new JoystickButton(assistPad, RobotMap.upArrow);
 	Button lowerElevator = new JoystickButton(assistPad, RobotMap.downArrow);
 	
-	Button enableClimbing = new JoystickButton(mainPad, RobotMap.startBtn);
+	Button enableClimbing = new JoystickButton(mainPad, RobotMap.backBtn);
 	Button reverseDriverButton = new JoystickButton(mainPad, RobotMap.startBtn);
 	Button drivePosition = new JoystickButton(mainPad, RobotMap.lBumber);
 	Button climbPosition = new JoystickButton(mainPad, RobotMap.rBumber);

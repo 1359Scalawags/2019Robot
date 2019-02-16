@@ -50,6 +50,7 @@ public class Constants {
 	// gameController
 	public static final double controllerDeadZone = .1;
 	public static final double ROTATE_TOLERANCE = 0.5;
+	public static final double angleToleranceVision = 5;
 	
 	public static final double drivePID_P = 1.0;
 	public static final double drivePID_I = 0.0;

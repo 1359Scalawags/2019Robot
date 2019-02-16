@@ -13,11 +13,11 @@ public class Network extends Subsystem{
     NetworkTableEntry distance;
     NetworkTableEntry angle;
     // not needed in final build
-    private double x;
-    private double distancevalue;
+    //private double x;
+   // private double distancevalue;
     // needed in final build
     float xPercentage;
-    int angleAtTarget;
+    float angleAtTarget;
     double distanceFromTarget;
     
     public Network(){
@@ -39,34 +39,34 @@ public class Network extends Subsystem{
         return distanceFromTarget;
     }
 
-    public int returnAngleFromTarget(){
+    public float returnAngleFromTarget(){
         return angleAtTarget;
     }
 
     public void getTableValues(){
         xPercentage = (float)xEntry.getDouble(0);
         distanceFromTarget = distance.getDouble(0);
-        angleAtTarget = (int)angle.getDouble(0);
-        System.out.println("##############################################"+xPercentage);
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+distancevalue);
+        angleAtTarget = (float)angle.getDouble(0);
+        // System.out.println("##############################################"+xPercentage);
+        // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+distancevalue);
     }
 
     // not needed in final build
-    public void setTablePeriodic(){
-        xEntry.setDouble(x);
-        distance.setDouble(distancevalue);
-        if(x <= 1000){
-            x += 1; // random values
-        }
-        else{
-            x = 0;
-        }
-        if(distancevalue <= 1000){
-            distancevalue += 1; // random values
-        }
-        else{
-            distancevalue = 0;
-        }
-    }
+    // public void setTablePeriodic(){
+    //     xEntry.setDouble(x);
+    //     distance.setDouble(distancevalue);
+    //     if(x <= 1000){
+    //         x += 1; // random values
+    //     }
+    //     else{
+    //         x = 0;
+    //     }
+    //     if(distancevalue <= 1000){
+    //         distancevalue += 1; // random values
+    //     }
+    //     else{
+    //         distancevalue = 0;
+    //     }
+    // }
 
 }

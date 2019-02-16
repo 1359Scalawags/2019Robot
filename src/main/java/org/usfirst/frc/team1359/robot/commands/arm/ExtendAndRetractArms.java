@@ -16,6 +16,7 @@ public class ExtendAndRetractArms extends CommandGroup {
         }
         else{
             addSequential(new RetractArms());
+            moveArms = ArmPos.IN;
         }
 	}
 }
