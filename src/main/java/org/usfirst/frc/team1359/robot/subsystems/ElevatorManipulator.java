@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1359.robot.subsystems;
 
+import org.usfirst.frc.team1359.robot.SoftenOutput;
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
@@ -28,6 +29,7 @@ public class ElevatorManipulator extends Subsystem {
 	float averagePercentageFromCenter;
 	private double sliderSpeed;
 	private boolean isAtTarget;
+	private SoftenOutput bufferLiftMotor;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 	private static final int liftMotorMulitplier  = 1;
@@ -59,7 +61,8 @@ public class ElevatorManipulator extends Subsystem {
 		setCargoHeight = false;
 		isAtTarget = false;
 		heightMode = HeightMode.HATCH;
-		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier; 
+		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
+		bufferLiftMotor = new SoftenOutput(8); 
 		//heightMode = false; // false = Hatch, true = cargo
 	}
 
@@ -158,11 +161,12 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	public void moveSlider() {
+		
 		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
-		if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter)){
+		if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter) && !isRightMax()){
 			slideMotor.set(sliderSpeed);
 		}
-		else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter)){
+		else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter) && !isLeftMax()){
 			slideMotor.set(-sliderSpeed);
 		}
 		else{
@@ -269,7 +273,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	private void raiseElevator(){
-		liftMotor.set(Constants.elevatorLiftSpeed * liftMotorMulitplier);
+		liftMotor.set(bufferLiftMotor.getOutput(Constants.elevatorLiftSpeed)*liftMotorMulitplier);
+		//liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
 	}
 
 	public boolean isDownMax() {

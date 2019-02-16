@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1359.robot;
 
 public class Utilities {
+
 	public Utilities() {
 	}
 
