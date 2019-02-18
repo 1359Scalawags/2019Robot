@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmManipulator extends Subsystem {
 
@@ -14,7 +15,7 @@ public class ArmManipulator extends Subsystem {
 	DigitalInput ballIn;
 	Talon leftBeltMotor , rightBeltMotor; // , rotateArmMotor;
 	Solenoid rotateArm;
-	Solenoid hatchPuncher;
+	//Solenoid hatchPuncher;
 	Solenoid armExtender;
 	//boolean beltsLocked; //still need to map the button
 
@@ -35,10 +36,12 @@ public class ArmManipulator extends Subsystem {
 		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
 		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
 		rotateArm = new Solenoid(RobotMap.armRotator);
-		hatchPuncher = new Solenoid(RobotMap.hatchPuncher);
+	//	hatchPuncher = new Solenoid(RobotMap.hatchPuncher);
 		armExtender = new Solenoid(RobotMap.armExtender);
 		//rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
 		//beltsLocked = true;
+		SmartDashboard.putData(rightBeltMotor);
+		SmartDashboard.putData(leftBeltMotor);
 	}
 
 	public void initDefaultCommand() {
@@ -60,20 +63,27 @@ public class ArmManipulator extends Subsystem {
 		 	rightBeltMotor.set(Constants.moveBeltSpeed * rightBeltMotorMultiplier);
 	}
 
-	public void extendHatchPuncher(){
-		hatchPuncher.set(true);
+	public double getLeftBeltSpeed(){
+		return leftBeltMotor.getSpeed();
 	}
 
-	public void retractHatchPuncher(){
-		hatchPuncher.set(false);
+	public double getRightBeltSpeed(){
+		return rightBeltMotor.getSpeed();
 	}
+	// public void extendHatchPuncher(){
+	// 	hatchPuncher.set(true);
+	// }
+
+	// public void retractHatchPuncher(){
+	// 	hatchPuncher.set(false);
+	// }
 
 	public void extendArms(){
-		armExtender.set(true); // true extends the arm
+		armExtender.set(false); // false extends the arm
 	}
 
 	public void retractArms(){
-		armExtender.set(false);
+		armExtender.set(true);
 	}
 	
 	public void rotateArms(ArmPosition pos) {

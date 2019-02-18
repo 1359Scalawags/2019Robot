@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+//simport edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorManipulator extends Subsystem {
 
 	Talon liftMotor , slideMotor;
-	DigitalInput bottomLimit;
-	DigitalInput topLimit;
+//	DigitalInput bottomLimit;
+	//DigitalInput topLimit;
 	DigitalInput slideLeftLimit;
 	DigitalInput slideRightLimit;
 	boolean isHeight;
@@ -47,11 +49,12 @@ public class ElevatorManipulator extends Subsystem {
 	float hatchHeights[] = {Constants.hatchBottomHeight, Constants.hatchBaseHeight, Constants.hatchMiddleHeight, Constants.hatchTopHeight};
 
 	public ElevatorManipulator(){
+		
 		elevatorHeight = new AnalogPotentiometer(Constants.potentiometerChannel, Constants.potentiometerFullRange, Constants.potentiometerOffset);
 		slideMotor = new Talon(RobotMap.elevatorSlideMotor);
 		liftMotor = new Talon(RobotMap.elevatorLiftMotor);
-		bottomLimit = new DigitalInput(RobotMap.elevatorBottomLimit);
-		topLimit = new DigitalInput(RobotMap.elevatorToplimit);
+	//	bottomLimit = new DigitalInput(RobotMap.elevatorBottomLimit);
+		//topLimit = new DigitalInput(RobotMap.elevatorToplimit);
 		slideLeftLimit =  new DigitalInput(RobotMap.elevatorSlideLeftLimit);
 		slideRightLimit =  new DigitalInput(RobotMap.elevatorSlideRightLimit);
 		isHeight = false;
@@ -64,6 +67,10 @@ public class ElevatorManipulator extends Subsystem {
 		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
 		bufferLiftMotor = new SoftenOutput(8); 
 		//heightMode = false; // false = Hatch, true = cargo
+		SmartDashboard.putData(slideMotor);
+		SmartDashboard.putData(liftMotor);
+
+
 	}
 
 	public void initDefaultCommand() {
@@ -76,6 +83,14 @@ public class ElevatorManipulator extends Subsystem {
 		else{
 			heightMode =  HeightMode.HATCH;
 		}
+	}
+
+	public double getSlideMotorSpeed(){
+		return slideMotor.getSpeed();
+	}
+
+	public double getliftMotorSpeed(){
+		return liftMotor.getSpeed();
 	}
 
 	// public void switchmodes(){
@@ -250,7 +265,7 @@ public class ElevatorManipulator extends Subsystem {
 
 	public void moveElevatorToHeight(double height){
 		double distanceFromTarget = height - getElevatorHeight();
-		if(Math.abs(distanceFromTarget) > Constants.withinHeight && !isUpMax() && !isDownMax()){
+		if(Math.abs(distanceFromTarget) > Constants.withinHeight /*&& !isUpMax() && !isDownMax()*/){
 			if(getElevatorHeight() > height){
 				lowerElevator();
 			}
@@ -277,13 +292,13 @@ public class ElevatorManipulator extends Subsystem {
 		//liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
 	}
 
-	public boolean isDownMax() {
-		return bottomLimit.get() == Constants.pressed;
-	}
+	// public boolean isDownMax() {
+	// 	return bottomLimit.get() == Constants.pressed;
+	// }
 	
-	public boolean isUpMax(){
-		return topLimit.get() == Constants.pressed;
-	}
+	// public boolean isUpMax(){
+	// 	return topLimit.get() == Constants.pressed;
+	// }
 
 	public boolean isLeftMax(){
 		return slideLeftLimit.get() == Constants.pressed;
@@ -294,7 +309,7 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	public void stopElevatorLiftMotor() {
-		liftMotor.set(0);
+		liftMotor.set(Constants.elevatorLiftStallSpeed);
 	}
 
 	public void stopElevatorSlideMotor(){

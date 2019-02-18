@@ -16,40 +16,41 @@ package org.usfirst.frc.team1359.robot;
 public class RobotMap {
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
+	
 	// Motors and controllers and solenoids and relays
-	public static final int frontleftMotor = 3;
-	public static final int rearLeftMotor = 2;
-	public static final int frontRightMotor = 7;
-	public static final int rearRightMotor = 1;
+	public static final int frontleftMotor = 4;
+	public static final int rearLeftMotor = 3;
+	public static final int frontRightMotor = 1;
+	public static final int rearRightMotor = 2;
 	
 	public static final int leftEncoderA = 10;
 	public static final int leftEncoderB = 11;
 	public static final int rightEncoderA = 12;
 	public static final int rightEncoderB = 13;
 
-	public static final int elevatorHeightPot = 0; // 2019 pot
-	public static final int armRotator = 0; //arm solenoid
-	public static final int pivotLock = 1; // pivot climb solenoid
-	public static final int hatchPuncher = 2; // hatch push solenoid
-	public static final int armExtender = 3; // arm extend out solenoid
+	public static final int elevatorHeightPot = 3; // 2019 pot
+	public static final int armRotator = 4; //arm solenoid
+	public static final int pivotLock = 7; // pivot climb solenoid
+//	public static final int hatchPuncher = 2; // hatch push solenoid
+	public static final int armExtender = 5; // arm extend out solenoid
 
 	// motors
-	public static final int elevatorSlideMotor = 4; 
+	public static final int elevatorSlideMotor = 6; 
 	//public static final int pivotMotor = 99; 
-	public static final int rightBeltMotor = 5;
-	public static final int leftBeltMotor = 6;
-	public static final int rotateArmMotor = 7; 
-	public static final int elevatorLiftMotor = 8;
+	public static final int rightBeltMotor = 8;
+	public static final int leftBeltMotor = 5;
+	//public static final int rotateArmMotor = 7; 
+	public static final int elevatorLiftMotor = 7;
 
 	// Limit Switches
-	public static final int ballInLimit = 0; 
+	public static final int ballInLimit = 15; 
 	//public static final int armTopLimit = 1; 
-	public static final int elevatorBottomLimit = 2; 
-	public static final int elevatorToplimit = 3; 
+	//public static final int elevatorBottomLimit = 2; // not used
+	//public static final int elevatorToplimit = 3;  // not used
 	//public static final int climbUpperLimit = 4;
 	//public static final int climbLowerLimit = 5; 
-	public static final int elevatorSlideLeftLimit = 6; 
-	public static final int elevatorSlideRightLimit = 7; 
+	public static final int elevatorSlideLeftLimit = 16; 
+	public static final int elevatorSlideRightLimit = 14; 
 
 	// gameController
 	public static final int mainController = 0;
@@ -95,7 +96,7 @@ public class RobotMap {
 	// public static final int raiseElevator = 99; //random value
 
 	// Extra
-	public static final int leonardo = 0;
+	//public static final int leonardo = 0;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 }

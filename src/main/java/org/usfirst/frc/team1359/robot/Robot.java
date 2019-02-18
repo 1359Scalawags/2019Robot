@@ -155,6 +155,15 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		System.out.println("Belt Motor Speeds");
+		System.out.println(kArmManipulator.getLeftBeltSpeed());
+		System.out.println(kArmManipulator.getRightBeltSpeed());
+		System.out.println("=============");
+
+		System.out.println("Lift and Slide motor speeds");
+		System.out.println(kElevatorManipulator.getliftMotorSpeed());
+		System.out.println(kElevatorManipulator.getSlideMotorSpeed());
+		System.out.println("===============");
 	}
 
 	/**

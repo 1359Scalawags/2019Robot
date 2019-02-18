@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1359.robot.commands.drive;
 
+import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +24,13 @@ public class DriveWithJoysticks extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kPIDDriveSystem.tankDrive(Robot.kOI.getLStickY(), Robot.kOI.getRStickY());
+		if(Robot.kElevatorManipulator.getElevatorHeight() <= Constants.distanceFromPot){
+			Robot.kPIDDriveSystem.tankDrive(Robot.kOI.getLStickY(), Robot.kOI.getRStickY());
+		}
+		else{
+			Robot.kPIDDriveSystem.tankDrive(Robot.kOI.getLStickY()*(-.0064*Robot.kElevatorManipulator.getElevatorHeight()+1.064), Robot.kOI.getRStickY()*(-.0064*Robot.kElevatorManipulator.getElevatorHeight()+1.064));
+		}
+		
 
 		SmartDashboard.putNumber("Gyro", Robot.kPIDDriveSystem.getAngle());
 		SmartDashboard.putNumber("Encoder Distance", Robot.kPIDDriveSystem.getDistanceLeft());
