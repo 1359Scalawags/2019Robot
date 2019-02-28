@@ -13,20 +13,28 @@ public class Constants {
 	public static final double elevatorLiftSpeed = 2; // random value
 	public static final double elevatorLiftStallSpeed = .15; //random value
 
-	public static final float hatchBaseHeight = 19f; // inches
-	public static final float hatchMiddleHeight = 47f; // inches
-	public static final float hatchTopHeight = 75f; // inches
-	public static final float hatchBottomHeight = 0; // random value
+	public static final float hatchBaseHeight = 19 - 15; // inches
+	public static final float hatchMiddleHeight = 47 - 15; // inches
+	public static final float hatchTopHeight = 75 - 15; // inches
+	//public static final float hatchBottomHeight = 0; // inches
+	public static final float restingHeight = 0;
 
-	public static final float cargoLowerHeight = 27.5f; // inches
-	public static final float cargoMiddleHeight = 55.5f; // inches
-	public static final float cargoTopHeight = 83.5f; // inches
+	public static final float liftAboveBrushHeight = 6; //inches
+	public static final float liftToHatchPortal = 2; // inches
+
+	public static final float cargoLowerHeight = 27.5f - 15; // inches
+	public static final float cargoMiddleHeight = 55.5f - 15; // inches
+	public static final float cargoTopHeight = 83.5f - 15; // inches
 
 	public static final double withinHeight = 2; // how close the elevator needs to be to target height (in inches)
-	public static final double valuePerAngle = 200; // random value 
-	public final static double potentiometerFullRange = 83.5 + 4.34; // inches
-	public static final double potentiometerOffset = -4.34; // random value
-	public static final int potentiometerChannel = 0; // random value
+	//public static final double valuePerAngle = 200; // random value 
+	public final static double potentiometerFullRange = 1;
+	public static final double potentiometerOffset = 0;
+	public static final double potentiometerUpVoltage = 2.315;
+	public static final double potentiometerDownVoltage = 4.768;
+	public static final double potentiometerSlopeValue = -34.04;
+	public static final double potentiometerInitialValue = 162.302;   
+	public static final int potentiometerChannel = 0; 
 	public static final double distanceFromPot = 10;
 
 	public static final boolean pressed = false;

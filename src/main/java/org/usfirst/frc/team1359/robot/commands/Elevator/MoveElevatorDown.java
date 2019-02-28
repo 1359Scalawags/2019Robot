@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveElevatorDown extends Command {
 
 	public MoveElevatorDown() {
-		super("MoveElevatorCargoDown");
+		super("MoveElevatorDown");
 		requires(Robot.kElevatorManipulator);
 	}
 
@@ -21,7 +21,11 @@ public class MoveElevatorDown extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevator();
+		if(Robot.kOI.getDpadYValue() == false){ // false is down
+			Robot.kElevatorManipulator.moveElevator();
+		}
+		else{
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

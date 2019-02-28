@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ExtendAndRetractArms extends CommandGroup {
 
-    static ArmPos moveArms= ArmPos.IN;
+    static ArmPos moveArms= ArmPos.OUT; // CHANGE TO IN AFTER ROBOT IS COMPLETE
     private enum ArmPos{
         OUT, IN
     }
@@ -15,6 +15,7 @@ public class ExtendAndRetractArms extends CommandGroup {
             moveArms = ArmPos.OUT;
         }
         else{
+            addSequential(new ReleaseHatch());
             addSequential(new RetractArms());
             moveArms = ArmPos.IN;
         }

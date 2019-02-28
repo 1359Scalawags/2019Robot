@@ -6,6 +6,7 @@ import org.usfirst.frc.team1359.robot.RobotMap;
 //import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climber extends Subsystem {
 
@@ -14,7 +15,9 @@ public class Climber extends Subsystem {
 	//DigitalInput lowerLimit, upperLimit;
 	//Talon pivotMotor;
 	boolean climberLocked;
+	Solenoid climbLock;
 	Solenoid pivotLock;
+	Solenoid backExtender;
 	//double speedChanger;
 
 	public enum ClimbPosition{
@@ -24,10 +27,18 @@ public class Climber extends Subsystem {
 	public Climber() {
 
 		//pivotMotor = new Talon(RobotMap.pivotMotor);
+		climbLock = new Solenoid(RobotMap.climbLock);
 		pivotLock = new Solenoid(RobotMap.pivotLock);
+		backExtender = new Solenoid(RobotMap.climbBackExtender);
 		//lowerLimit = new DigitalInput(RobotMap.climbLowerLimit);
 		//upperLimit = new DigitalInput(RobotMap.climbUpperLimit);
 		climberLocked = true;
+		climbLock.setName("climbLocker");
+		pivotLock.setName("pivotLock");
+		backExtender.setName("ClimbBackExtender");
+		SmartDashboard.putData(backExtender);
+		SmartDashboard.putData(climbLock);
+		SmartDashboard.putData(pivotLock);
 	}
 
 	public void initDefaultCommand() {
@@ -46,16 +57,36 @@ public class Climber extends Subsystem {
 		}
 		else {
 			if(/*!isClimbPosition() &&*/ pos == ClimbPosition.CLIMB) {
-				pivotLock.set(true); // true sets it to climb position
+				climbLock.set(false); // true sets it to climb position
 			}
 			else if(/*!isDrivePosition() &&*/ pos == ClimbPosition.DRIVE) {
-				pivotLock.set(false);
+				climbLock.set(true);
 			}
 			else {
 			}
 		}
 	}
 
+	public void unlockPivot(){
+		pivotLock.set(true);
+	}
+	public void lockPivot(){
+		pivotLock.set(false);
+	}
+
+	public void extendBack(){
+		if(climberLocked){}
+		else{
+			backExtender.set(true);
+		}
+	}
+
+	public void retractBack(){
+		if(climberLocked){}
+		else{
+			backExtender.set(false);
+		}
+	}
 	// public void switchSpeedDirection(){
 	// 	speedChanger = -(speedChanger);
 	// }

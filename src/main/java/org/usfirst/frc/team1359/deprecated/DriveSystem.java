@@ -18,7 +18,7 @@ public class DriveSystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	Talon m_frontLeft = new Talon(RobotMap.frontleftMotor);
+	Talon m_frontLeft = new Talon(RobotMap.frontLeftMotor);
 	//Talon m_rearLeft = new Talon(RobotMap.rearLeftMotor);
 	//SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
 

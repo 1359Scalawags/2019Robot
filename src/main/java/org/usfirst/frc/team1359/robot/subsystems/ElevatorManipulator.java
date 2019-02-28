@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-//simport edu.wpi.first.wpilibj.livewindow.LiveWindow;
+//import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorManipulator extends Subsystem {
@@ -46,7 +46,7 @@ public class ElevatorManipulator extends Subsystem {
 
 	float cargoHeights[] = {Constants.cargoLowerHeight, Constants.cargoLowerHeight, Constants.cargoMiddleHeight, Constants.cargoTopHeight};
 
-	float hatchHeights[] = {Constants.hatchBottomHeight, Constants.hatchBaseHeight, Constants.hatchMiddleHeight, Constants.hatchTopHeight};
+	float hatchHeights[] = {Constants.restingHeight, Constants.hatchBaseHeight, Constants.hatchMiddleHeight, Constants.hatchTopHeight};
 
 	public ElevatorManipulator(){
 		
@@ -67,9 +67,10 @@ public class ElevatorManipulator extends Subsystem {
 		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
 		bufferLiftMotor = new SoftenOutput(8); 
 		//heightMode = false; // false = Hatch, true = cargo
+		slideMotor.setName("elevatorSlideMotor");
+		liftMotor.setName("elevatorLiftMotor");
 		SmartDashboard.putData(slideMotor);
 		SmartDashboard.putData(liftMotor);
-
 
 	}
 
@@ -98,7 +99,7 @@ public class ElevatorManipulator extends Subsystem {
 	// }
 
 	public void setIndex(){
-		index = 1;
+		index = 0;
 	}
 
 	// public void setIndexToHeight(){
@@ -168,7 +169,7 @@ public class ElevatorManipulator extends Subsystem {
 	// }
 
 	public double getElevatorHeight(){
-		return elevatorHeight.get() ; // * Constants.valuePerAngle;
+		return Constants.potentiometerSlopeValue*elevatorHeight.get() + Constants.potentiometerInitialValue; // height in inches
 	}
 
 	public boolean isAtCenterTarget(){
@@ -238,7 +239,7 @@ public class ElevatorManipulator extends Subsystem {
 			moveElevatorToHeight(Constants.hatchTopHeight);
 		}
 		else if(index == 0){
-			moveElevatorToHeight(Constants.hatchBottomHeight);
+			moveElevatorToHeight(Constants.restingHeight);
 		}
 		else{
 			stopElevatorLiftMotor();

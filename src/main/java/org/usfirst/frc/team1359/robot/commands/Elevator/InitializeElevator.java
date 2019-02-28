@@ -23,7 +23,7 @@ public class InitializeElevator extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.kElevatorManipulator.moveElevatorToHeight(Constants.hatchBaseHeight);
+		Robot.kElevatorManipulator.moveElevatorToHeight(Constants.restingHeight);
 		Robot.kElevatorManipulator.setIndex();
 	}
 

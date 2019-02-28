@@ -11,16 +11,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmManipulator extends Subsystem {
 
-	//DigitalInput bottomLimit, topLimit;
+	DigitalInput bottomLimit, topLimit;
 	DigitalInput ballIn;
-	Talon leftBeltMotor , rightBeltMotor; // , rotateArmMotor;
-	Solenoid rotateArm;
+	Talon leftBeltMotor , rightBeltMotor , rotateArmMotor;
+	//Solenoid rotateArm;
 	//Solenoid hatchPuncher;
 	Solenoid armExtender;
+	Solenoid hatchGrabber;
 	//boolean beltsLocked; //still need to map the button
 
 	private static final int leftBeltMotorMultiplier = 1; // change to -1 to reverse direction for leftBeltMotor
-	private static final int rightBeltMotorMultiplier = 1; // change to -1 to reverse direction for rightBeltMotor
+	private static final int rightBeltMotorMultiplier = 1;
+	private static final int armRotateMotorMultiplier = 1;
 
 	public enum ArmPosition {
 		UP, DOWN
@@ -30,18 +32,26 @@ public class ArmManipulator extends Subsystem {
 
 	public ArmManipulator() {
 		
-	//	bottomLimit = new DigitalInput(RobotMap.armBottomLimit);
-	//	topLimit = new DigitalInput(RobotMap.armTopLimit);
+		bottomLimit = new DigitalInput(RobotMap.armBottomLimit);
+		topLimit = new DigitalInput(RobotMap.armTopLimit);
 		ballIn = new DigitalInput(RobotMap.ballInLimit);
 		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
 		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
-		rotateArm = new Solenoid(RobotMap.armRotator);
+		//rotateArm = new Solenoid(RobotMap.armRotator);
 	//	hatchPuncher = new Solenoid(RobotMap.hatchPuncher);
 		armExtender = new Solenoid(RobotMap.armExtender);
-		//rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
+		hatchGrabber = new Solenoid(RobotMap.hatchGrabber);
+		rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
 		//beltsLocked = true;
+		rotateArmMotor.setName("rotateArmMotor");
+		rightBeltMotor.setName("rightBeltMotor");
+		leftBeltMotor.setName("leftBeltMotor");
+		armExtender.setName("armExtender");
 		SmartDashboard.putData(rightBeltMotor);
 		SmartDashboard.putData(leftBeltMotor);
+		SmartDashboard.putData(armExtender);
+		SmartDashboard.putData(rotateArmMotor);
+		//SmartDashboard.putData(rotateArm);
 	}
 
 	public void initDefaultCommand() {
@@ -85,8 +95,25 @@ public class ArmManipulator extends Subsystem {
 	public void retractArms(){
 		armExtender.set(true);
 	}
+
+	public void grabHatch(){
+		hatchGrabber.set(false); //false grabs
+	}
+	public void releaseHatch(){
+		hatchGrabber.set(true);
+	}
 	
-	public void rotateArms(ArmPosition pos) {
+	// public void rotateArms(ArmPosition pos) {
+	// 	if (pos == ArmPosition.DOWN) {
+	// 		goDown();
+	// 	}
+	// 	 else if (pos == ArmPosition.UP) {
+	// 			goUp();
+	// 		} 
+	// 		else {
+	// 		}
+	// }
+		public void rotateArms(ArmPosition pos) {
 		if (pos == ArmPosition.DOWN) {
 			goDown();
 		}
@@ -96,14 +123,32 @@ public class ArmManipulator extends Subsystem {
 			else {
 			}
 	}
-	
+		
 	private void goDown() {
-		rotateArm.set(false); 
+		if(!isDown()){
+			rotateArmMotor.set(Constants.rotateArmSpeed*armRotateMotorMultiplier); 
+		}
+		else{
+			rotateArmMotor.set(0);
+		}
 	}
 
 	private void goUp() {
-		rotateArm.set(true); // true is moving the arms up
+		if(!isUp()){
+			rotateArmMotor.set((-Constants.rotateArmSpeed)*armRotateMotorMultiplier);
+		}
+		else{
+		rotateArmMotor.set(0);
+		}
 	}
+	
+	// private void goDown() {
+	// 	rotateArm.set(false); 
+	// }
+
+	// private void goUp() {
+	// 	rotateArm.set(true); // true is moving the arms up
+	// }
 
 	public void stopBelts() {
 		leftBeltMotor.set(0);
@@ -122,11 +167,11 @@ public class ArmManipulator extends Subsystem {
 	// 	return beltsLocked;
 	// }
 
-	// public boolean isUp() {
-	// 	return (topLimit.get() == Constants.pressed);
-	// }
+	public boolean isUp() {
+		return (topLimit.get() == Constants.pressed);
+	}
 
-	// public boolean isDown() {
-	// 	return (bottomLimit.get() == Constants.pressed);
-	// }
+	public boolean isDown() {
+		return (bottomLimit.get() == Constants.pressed);
+	}
 }
