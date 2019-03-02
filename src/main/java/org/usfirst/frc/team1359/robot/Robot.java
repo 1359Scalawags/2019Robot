@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1359.deprecated.ExampleSubsystem;
 import org.usfirst.frc.team1359.robot.commands.autonomous.AutonomousCommandDispatch;
 import org.usfirst.frc.team1359.robot.commands.autonomous.TurnByAngle;
-import org.usfirst.frc.team1359.robot.subsystems.Aesthetics;
-import org.usfirst.frc.team1359.robot.subsystems.Camera;
+//import org.usfirst.frc.team1359.robot.subsystems.Camera;
 import org.usfirst.frc.team1359.robot.subsystems.Climber;
 import org.usfirst.frc.team1359.robot.subsystems.ArmManipulator;
 import org.usfirst.frc.team1359.robot.subsystems.ElevatorManipulator;
@@ -24,19 +23,21 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static final PIDDriveSystem kPIDDriveSystem = new PIDDriveSystem();
-	public static final Aesthetics kAesthetics = new Aesthetics();
+	//public static final Aesthetics kAesthetics = new Aesthetics();
 	public static OI kOI;
 	public static final Climber kClimber = new Climber();
 	public static final ArmManipulator kArmManipulator = new ArmManipulator();
 	public static final ElevatorManipulator kElevatorManipulator = new ElevatorManipulator();
-	public static final Camera kcamera = new Camera();
+	//public static final Camera kcamera = new Camera();
 	public static final Network kNetwork = new Network();
 	public static String AutonomousLeftOrRightPriority = "None";
 	public static String AutonomousMiddlePriority = "None";
 	Command m_autonomousCommand;
-	SendableChooser<String> m_priority = new SendableChooser<String>();
+	//SendableChooser<String> m_priority = new SendableChooser<String>();
 	SendableChooser<String> m_priorityMiddle = new SendableChooser<String>();
 	SendableChooser<String> m_override = new SendableChooser<String>();
+	SendableChooser<Boolean> autoOverride = new SendableChooser<Boolean>();
+	public static SendableChooser<String> override = new SendableChooser<String>();
 
 	// vision
     NetworkTableEntry xEntry;
@@ -65,21 +66,29 @@ public class Robot extends TimedRobot {
 		 * 
 		 * addOption replaced addOject
 		 */
-		m_priority.setDefaultOption("Switch", "Switch");
-		m_priority.addOption("Scale", "Scale");
+	//	m_priority.setDefaultOption("Switch", "Switch");
+	//	m_priority.addOption("Scale", "Scale");
 		
-		m_priority.addOption("Cross Line Only", "Neither");
+	//	m_priority.addOption("Cross Line Only", "Neither");
 		
 		m_priorityMiddle.setDefaultOption("Yes", "Yes");
 		m_priorityMiddle.addOption("No", "No");
 		
-		m_override.addOption("Auto", Constants.autoModeAuto);
+		//m_override.addOption("Auto", Constants.autoModeAuto);
 		m_override.addOption("Override Left", Constants.autoModeLeft);
 		m_override.addOption("Override Middle", Constants.autoModeMiddle);
 		m_override.addOption("Override Right", Constants.autoModeRight);
-		SmartDashboard.putData("Auto priority", m_priority);
-		SmartDashboard.putData("Auto Middle", m_priorityMiddle);
-		SmartDashboard.putData("Auton Override", m_override);
+	//	SmartDashboard.putData("Auto priority", m_priority);
+	//	SmartDashboard.putData("Auto Middle", m_priorityMiddle);
+	//	SmartDashboard.putData("Auton Override", m_override);
+
+		override.addOption("Yes", Constants.overrideVisionYes);
+		override.addOption("No", Constants.overrideVisionNo);
+		SmartDashboard.putData("Override Vision",override);
+
+		//autoOverride.addObject("Yes", true);
+		//autoOverride.addObject("No", false);
+		SmartDashboard.putData("Override Autonomous",autoOverride);
 		
 
 		System.out.println("====The 1359 Scalawags are ready to set sail!====");
@@ -119,8 +128,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		this.AutonomousLeftOrRightPriority = m_priority.getSelected();
-		this.AutonomousMiddlePriority = m_priorityMiddle.getSelected();
+	//	this.AutonomousLeftOrRightPriority = m_priority.getSelected();
+	//	this.AutonomousMiddlePriority = m_priorityMiddle.getSelected();
 		m_autonomousCommand = new AutonomousCommandDispatch(m_override.getSelected());
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -129,7 +138,7 @@ public class Robot extends TimedRobot {
 		 * ExampleCommand(); break; }
 		 */
 
-		if (m_autonomousCommand != null) {
+		if (m_autonomousCommand != null && !autoOverride.getSelected()) {
 			m_autonomousCommand.start();
 		}
 	}

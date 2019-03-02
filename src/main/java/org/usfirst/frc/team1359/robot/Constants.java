@@ -97,4 +97,7 @@ public class Constants {
 	public static final String autoModeLeft = "Left";
 	public static final String autoModeMiddle = "Middle";
 	public static final String autoModeRight = "Right";
+
+	public static final String overrideVisionYes = "YES";
+	public static final String overrideVisionNo = "NO";
 }

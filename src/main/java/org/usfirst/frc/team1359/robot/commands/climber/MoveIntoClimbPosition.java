@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1359.robot.commands.climber;
 
 import org.usfirst.frc.team1359.robot.Robot;
-import org.usfirst.frc.team1359.robot.commands.Delay;
 import org.usfirst.frc.team1359.robot.commands.climber.PivotPosition.pivotPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

@@ -36,19 +36,19 @@ public class AutonomousCommandDispatch extends CommandGroup {
 		}else if(autonOverride.equals(Constants.autoModeRight)) {
 			autoMode = AutoModes.right;
 		}else {
-			if(driverStation.getLocation() == 1) {
-				autoMode = AutoModes.left;
-			}else if(driverStation.getLocation() == 2) {
-				autoMode = AutoModes.middle;
-			}else if(driverStation.getLocation() == 3) {
-				autoMode = AutoModes.right;
-			}else {
+			// if(driverStation.getLocation() == 1) {
+			// 	autoMode = AutoModes.left;
+			// }else if(driverStation.getLocation() == 2) {
+			// 	autoMode = AutoModes.middle;
+			// }else if(driverStation.getLocation() == 3) {
+			// 	autoMode = AutoModes.right;
+			// }else {
 				
-			}
+			// }
 		}
-
-		SmartDashboard.putString("FMS", alliance.toString() + "\n" + driverStation.getGameSpecificMessage());
-
+		if(alliance != null){
+			SmartDashboard.putString("FMS", alliance.toString() + "\n" + driverStation.getGameSpecificMessage());
+		}
 		
 		if (autoMode == AutoModes.left) { // left
 			addSequential(new AutonomousLeftPosition()); // get into position

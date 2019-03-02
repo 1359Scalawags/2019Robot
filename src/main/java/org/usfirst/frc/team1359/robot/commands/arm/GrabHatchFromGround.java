@@ -6,7 +6,7 @@ import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorToHeight;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class GrabHatchFromGround extends CommandGroup {
+public class GrabHatchFromGround extends CommandGroup { //needs to be mapped to a button
 
 	public GrabHatchFromGround() {
        addSequential(new MoveElevatorToHeight(Constants.restingHeight));

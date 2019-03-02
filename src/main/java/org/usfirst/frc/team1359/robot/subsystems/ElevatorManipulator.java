@@ -201,6 +201,19 @@ public class ElevatorManipulator extends Subsystem {
 		// }
 	}
 
+	public void moveSliderJoystick(double speed){
+			speed = speed * slideMotorMultiplier;
+		if(speed > 0 && !isRightMax()){
+			slideMotor.set(speed);
+		}
+		else if(speed < 0 && !isLeftMax()){
+			slideMotor.set(speed);
+		}
+		else{
+			stopElevatorSlideMotor();
+		}
+	}
+
 	// public void moveElevatorHatch(elevatorHatchHeight pos){
 	// 	if(pos == elevatorHatchHeight.BASE){
 	// 		moveElevatorToHeight(Constants.hatchBaseHeight);
