@@ -31,6 +31,9 @@ public class MoveElevatorSlider extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if(!(override == VisionOverride.YES)){
+			Robot.kElevatorManipulator.initializeMoveSlider();
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run

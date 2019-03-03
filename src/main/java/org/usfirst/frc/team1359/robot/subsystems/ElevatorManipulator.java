@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1359.robot.subsystems;
 
-import org.usfirst.frc.team1359.robot.SoftenOutput;
 import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
+import org.usfirst.frc.team1359.robot.SoftenOutput;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ElevatorManipulator extends Subsystem {
 
-	Talon liftMotor , slideMotor;
-//	DigitalInput bottomLimit;
-	//DigitalInput topLimit;
+	Talon liftMotor, slideMotor;
+	// DigitalInput bottomLimit;
+	// DigitalInput topLimit;
 	DigitalInput slideLeftLimit;
 	DigitalInput slideRightLimit;
 	boolean isHeight;
@@ -32,6 +33,8 @@ public class ElevatorManipulator extends Subsystem {
 	private double sliderSpeed;
 	private boolean isAtTarget;
 	private SoftenOutput bufferLiftMotor;
+	private double sliderTime;
+	private Timer timer;
 
 	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 	private static final int liftMotorMulitplier  = 1;
@@ -44,7 +47,7 @@ public class ElevatorManipulator extends Subsystem {
 		HATCH, CARGO
 	}
 
-	float cargoHeights[] = {Constants.cargoLowerHeight, Constants.cargoLowerHeight, Constants.cargoMiddleHeight, Constants.cargoTopHeight};
+	float cargoHeights[] = {Constants.cargoLowerHeight, Constants.cargoShipCargoHeight, Constants.cargoMiddleHeight, Constants.cargoTopHeight};
 
 	float hatchHeights[] = {Constants.restingHeight, Constants.hatchBaseHeight, Constants.hatchMiddleHeight, Constants.hatchTopHeight};
 
@@ -65,7 +68,8 @@ public class ElevatorManipulator extends Subsystem {
 		isAtTarget = false;
 		heightMode = HeightMode.HATCH;
 		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
-		bufferLiftMotor = new SoftenOutput(8); 
+		bufferLiftMotor = new SoftenOutput(Constants.elevatorSampleSize);
+		timer = new Timer(); 
 		//heightMode = false; // false = Hatch, true = cargo
 		slideMotor.setName("elevatorSlideMotor");
 		liftMotor.setName("elevatorLiftMotor");
@@ -176,29 +180,47 @@ public class ElevatorManipulator extends Subsystem {
 		return isAtTarget;
 	}
 
-	public void moveSlider(/*double speed*/) {
-		
+	public void initializeMoveSlider(){
 		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
-		if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter) && !isLeftMax()){
-			slideMotor.set(-sliderSpeed);
-		}
-		else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter) && !isRightMax()){
-			slideMotor.set(sliderSpeed);
-		}
-		else{
-			stopElevatorSlideMotor();
-			isAtTarget = true;
-		}
-		// speed = speed * slideMotorMultiplier;
-		// if(speed > 0 && !isRightMax()){
-		// 	slideMotor.set(speed);
+		moveSliderJoystick(-2);
+		sliderTime = (Constants.sliderTimeToFarRight/*/100*//Constants.percentageFromCameraToFarRight)*averagePercentageFromCenter;
+		timer.reset();
+	}
+
+	public void moveSlider() {
+		
+		// averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
+		// if(averagePercentageFromCenter < (50 - Constants.withinPercentageToCenter) && !isLeftMax()){
+		// 	slideMotor.set(-sliderSpeed);
 		// }
-		// else if(speed < 0 && !isLeftMax()){
-		// 	slideMotor.set(speed);
+		// else if(averagePercentageFromCenter > (50 + Constants.withinPercentageToCenter) && !isRightMax()){
+		// 	slideMotor.set(sliderSpeed);
 		// }
 		// else{
 		// 	stopElevatorSlideMotor();
+		// 	isAtTarget = true;
 		// }
+
+		if(averagePercentageFromCenter == -1){
+			stopElevatorSlideMotor();
+			isAtTarget = true;
+		}
+		else{
+			if(averagePercentageFromCenter > Constants.percentageFromCameraToFarRight){
+				stopElevatorSlideMotor();
+				isAtTarget = true;
+			}
+			else{
+				timer.start();
+				if((double)timer.get() < sliderTime){
+					slideMotor.set(sliderSpeed);
+				}
+				else{
+					stopElevatorSlideMotor();
+					isAtTarget = true;
+				}
+			}
+		}
 	}
 
 	public void moveSliderJoystick(double speed){

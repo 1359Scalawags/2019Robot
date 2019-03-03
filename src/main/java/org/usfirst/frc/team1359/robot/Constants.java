@@ -2,16 +2,21 @@ package org.usfirst.frc.team1359.robot;
 
 public class Constants {
 
+	//vision slider constants
+	public static final double percentageFromCameraToFarRight = 75; // random. in percentage
+	public static final double sliderTimeToFarRight = 5; //random. seconds
+
 	//2019 constants
 	public static final float withinAngleToTarget = 4f;
 	public static final double withinDistanceToTarget = 2; // random value
 	public static final float withinPercentageToCenter = 5; // percentage
-	public static final double slideMotorSpeed = 2; //random value
-	public static final double climbMotorSpeed = 2; // random value 
-	public static final double rotateArmSpeed = 2; // random value 
-	public static final double moveBeltSpeed = 2; // random value 
-	public static final double elevatorLiftSpeed = 2; // random value
+	public static final double slideMotorSpeed = 1; //random value
+	public static final double climbMotorSpeed = 1; // random value 
+	public static final double rotateArmSpeed = .5; // random value 
+	public static final double moveBeltSpeed = 1; // random value 
+	public static final double elevatorLiftSpeed = 1; // random value
 	public static final double elevatorLiftStallSpeed = .15; //random value
+	public static final int elevatorSampleSize = 8;
 
 	public static final float hatchBaseHeight = 19 - 15; // inches
 	public static final float hatchMiddleHeight = 47 - 15; // inches
@@ -22,18 +27,19 @@ public class Constants {
 	public static final float liftAboveBrushHeight = 6; //inches
 	public static final float liftToHatchPortal = 2; // inches
 
+	public static final float cargoShipCargoHeight = 39.5f - 15; //inches
 	public static final float cargoLowerHeight = 27.5f - 15; // inches
-	public static final float cargoMiddleHeight = 55.5f - 15; // inches
+	public static final float cargoMiddleHeight = 55.5f- 15; // inches
 	public static final float cargoTopHeight = 83.5f - 15; // inches
 
-	public static final double withinHeight = 2; // how close the elevator needs to be to target height (in inches)
+	public static final double withinHeight = .5; // how close the elevator needs to be to target height (in inches)
 	//public static final double valuePerAngle = 200; // random value 
 	public final static double potentiometerFullRange = 1;
 	public static final double potentiometerOffset = 0;
 	public static final double potentiometerUpVoltage = 2.315;
 	public static final double potentiometerDownVoltage = 4.768;
-	public static final double potentiometerSlopeValue = -34.04;
-	public static final double potentiometerInitialValue = 162.302;   
+	public static final double potentiometerSlopeValue = -27.925; // -34.04;
+	public static final double potentiometerInitialValue = 133.146; // 162.302;   
 	public static final int potentiometerChannel = 0; 
 	public static final double distanceFromPot = 10;
 
@@ -69,7 +75,7 @@ public class Constants {
 	public static final double gyroPID_P = 0.4; 
 	public static final double gyroPID_I = 0.05; 
 	public static final double gyroPID_D = 0.05;
-	
+
 	// autonomous
 	public static final float distanceToRocket = 10; // random value
 	public static final float distanceOffTier2 = 3; // random value
@@ -89,7 +95,6 @@ public class Constants {
 	public static final double distanceToMiddle = 18; 
 	public static final double approachScaleBox=-3; 
 
-	// MoveToMiddle autonomous
 	public static final double moveToMiddleArmTime = 2.25;
 	public static final double moveToMiddleArmSpeed = .50;
 	

@@ -38,7 +38,7 @@ public class RobotMap {
 	public static final int hatchGrabber = 2;
 
 	// motors
-	public static final int elevatorSlideMotor = 6; 
+	public static final int elevatorSlideMotor = 4; 
 	//public static final int pivotMotor = 99; 
 	public static final int rightBeltMotor = 8;
 	public static final int leftBeltMotor = 5; 
@@ -47,8 +47,8 @@ public class RobotMap {
 
 	// Limit Switches
 	public static final int ballInLimit = 16;
-	public static final int armTopLimit = 17; //random value 
-	public static final int armBottomLimit = 18; //random value
+	public static final int armTopLimit = 8; 
+	public static final int armBottomLimit = 9;
 	//public static final int elevatorBottomLimit = 2; // not used
 	//public static final int elevatorToplimit = 3;  // not used
 	//public static final int climbUpperLimit = 4;
