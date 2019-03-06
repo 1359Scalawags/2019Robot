@@ -18,10 +18,10 @@ public class RobotMap {
 	// following variables to use with your drivetrain subsystem.
 	
 	// Motors and controllers and solenoids and relays
-	public static final int rearleftMotor = 1; 
-	public static final int frontLeftMotor = 4;
-	public static final int frontRightMotor = 2;
-	public static final int rearRightMotor = 3;
+	public static final int rearleftMotor = 3; 
+	//public static final int frontLeftMotor = 3;
+	//public static final int frontRightMotor = 2;
+	public static final int rearRightMotor = 1;
 	
 	public static final int leftEncoderA = 10;
 	public static final int leftEncoderB = 11;
@@ -29,7 +29,7 @@ public class RobotMap {
 	public static final int rightEncoderB = 13;
 
 	public static final int elevatorHeightPot = 0; // 2019 pot
-	public static final int armRotator = 4; //arm solenoid
+	//public static final int armRotator = 4; //arm solenoid
 	public static final int climbLock = 7; // climb solenoid
 	public static final int pivotLock = 6; // pivot solenoid
 	public static final int climbBackExtender = 1; // solenoid
@@ -38,17 +38,17 @@ public class RobotMap {
 	public static final int hatchGrabber = 2;
 
 	// motors
-	public static final int elevatorSlideMotor = 4; 
+	public static final int elevatorSlideMotor = 6; 
 	//public static final int pivotMotor = 99; 
 	public static final int rightBeltMotor = 8;
 	public static final int leftBeltMotor = 5; 
-	public static final int rotateArmMotor = 0; // random value 
+	public static final int rotateArmMotor = 4; 
 	public static final int elevatorLiftMotor = 7;
 
 	// Limit Switches
 	public static final int ballInLimit = 16;
-	public static final int armTopLimit = 8; 
-	public static final int armBottomLimit = 9;
+	public static final int armTopLimit = 9; 
+	public static final int armBottomLimit = 8;
 	//public static final int elevatorBottomLimit = 2; // not used
 	//public static final int elevatorToplimit = 3;  // not used
 	//public static final int climbUpperLimit = 4;

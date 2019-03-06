@@ -22,13 +22,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PIDDriveSystem extends Subsystem {
 
 	// left side
-	Talon m_frontLeft = new Talon(RobotMap.frontLeftMotor);
+	//Talon m_frontLeft = new Talon(RobotMap.frontLeftMotor);
 	Talon m_rearLeft = new Talon(RobotMap.rearleftMotor); //new
 
 	SpeedControllerGroup leftMotorGroup  = new SpeedControllerGroup(/*m_frontLeft,*/ m_rearLeft); 
 
 	// right side
-	Talon m_frontRight = new Talon(RobotMap.frontRightMotor);
+//	Talon m_frontRight = new Talon(RobotMap.frontRightMotor);
 	Talon m_rearRight = new Talon(RobotMap.rearRightMotor); //new
 
 	SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(/*m_frontRight,*/ m_rearRight); // = new SpeedControllerGroup(m_frontRight, m_rearRight);

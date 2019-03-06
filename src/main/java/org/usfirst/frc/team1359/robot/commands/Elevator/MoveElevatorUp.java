@@ -24,11 +24,11 @@ public class MoveElevatorUp extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.kOI.getDpadYValue() == true){ //true is up
+	//	if(Robot.kOI.getDpadYValue() == true){ //true is up
 			Robot.kElevatorManipulator.moveElevator();
-		}
-		else{
-		}
+	//	}
+		// else{
+		// }
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

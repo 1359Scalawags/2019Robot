@@ -61,7 +61,7 @@ public class OI {
 		// moveArmsUp.whenPressed(new MoveArmsUp());
 		getHatchFromPortal.whenPressed(new GetHatchFromPortal());
 		moveArmsUpAndDown.whenPressed(new MoveArmsUpAndDown());
-		moveElevatorSlider.whenPressed(new MoveElevatorSlider(Robot.override.getSelected()));
+	//	moveElevatorSlider.whenPressed(new MoveElevatorSlider(Robot.override.getSelected()));
 		extendAndRetractArms.whenPressed(new ExtendAndRetractArms());
 		stopBelts.whenPressed(new StopBelts());
 		IntakeBall.whenPressed(new BallIntake());
@@ -95,10 +95,20 @@ public class OI {
 	private double getDPadY(){
 		return assistPad.getRawAxis(RobotMap.yPadAxis);
 	}
-
-	public boolean getDpadYValue(){
+	public enum DPadState {
+		UP, DOWN, NONE
+	}
+	public OI.DPadState getDpadYValue(){
 		double y = getDPadY();
-		return (y >= .5);
+		if(y >= .5){
+			return(DPadState.UP);
+		}
+		else if(y <= -.5){
+			return(DPadState.DOWN);
+		}
+		else{
+			return(DPadState.NONE);
+		}
 	}
 	
 	//2019 drive
@@ -144,5 +154,20 @@ public class OI {
 
 	// public boolean getRaiseElevator(){
 	// 	return raiseElevator.get();
+	// }
+
+	// public enum DpadState {
+	// 	none,
+	// 	up,
+	// 	down,
+	// 	handled
+	// }
+	// DpadState state = DpadState.none;
+	// public void getDpadPressed() {
+	// 	if(state == none && getDpadUp()) {
+	// 		state = DpadState.up;
+	// 	} else if(state == none && getDpadDown()) {
+	// 		state = DpadState.down;
+	// 	}
 	// }
 }

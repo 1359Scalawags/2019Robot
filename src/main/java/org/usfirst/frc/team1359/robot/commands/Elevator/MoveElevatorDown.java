@@ -16,16 +16,23 @@ public class MoveElevatorDown extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.kElevatorManipulator.abateHeight();
+	//	if(Robot.kOI.getDpadYValue() == false){
+			Robot.kElevatorManipulator.abateHeight();
+	//	}
+		// else if(Robot.kOI.getDpadYValue() == true){
+		// 	Robot.kElevatorManipulator.incrementHeight();
+		// }
+		// else{
+		// }
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.kOI.getDpadYValue() == false){ // false is down
+	//	if(Robot.kOI.getDpadYValue() == false){ // false is down
 			Robot.kElevatorManipulator.moveElevator();
-		}
-		else{
-		}
+		// }
+		// else{
+		// }
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

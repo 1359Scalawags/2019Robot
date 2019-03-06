@@ -4,15 +4,16 @@ import org.usfirst.frc.team1359.robot.Constants;
 import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
 import org.usfirst.frc.team1359.robot.SoftenOutput;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevator;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Timer;
 
 public class ElevatorManipulator extends Subsystem {
 
@@ -79,6 +80,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
+		//setDefaultCommand(new MoveElevator());
+		//setDefaultCommand(new MoveElevatorDown());
 	}
 
 	public void switchModes(){
