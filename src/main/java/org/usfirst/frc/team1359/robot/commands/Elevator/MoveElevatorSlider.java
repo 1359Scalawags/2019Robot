@@ -17,32 +17,34 @@ public class MoveElevatorSlider extends Command {
 		YES, NO
 	}
 
-	public MoveElevatorSlider(String entry) {
+	public MoveElevatorSlider(/*String entry*/) {
 		super("MoveElevatorSlider");
-		requires(Robot.kElevatorManipulator);
-		visionOverride = entry;
+		requires(Robot.kArmManipulator);
+		//visionOverride = entry;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		//setInterruptible(false);
-		if(visionOverride.equals(Constants.overrideVisionYes)){
-			override = VisionOverride.YES;
-		}
+	
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		visionOverride = Robot.override.getSelected();
+		if(visionOverride.equals(Constants.overrideVisionYes)){
+			override = VisionOverride.YES;
+		}
 		if(!(override == VisionOverride.YES)){
-			Robot.kElevatorManipulator.initializeMoveSlider();
+			Robot.kArmManipulator.initializeMoveSlider();
 		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if(override == VisionOverride.YES){
-			Robot.kElevatorManipulator.moveSliderJoystick(Robot.kOI.getSliderStick());
+			Robot.kArmManipulator.moveSliderJoystick(Robot.kOI.getSliderStick());
 		}
 		else{
-			Robot.kElevatorManipulator.moveSlider();
+			Robot.kArmManipulator.moveSlider();
 		}
 	}
 
@@ -52,7 +54,7 @@ public class MoveElevatorSlider extends Command {
 			return false;
 		}
 		else{
-			return Robot.kElevatorManipulator.isAtCenterTarget();
+			return Robot.kArmManipulator.isAtCenterTarget();
 		}
 	}
 

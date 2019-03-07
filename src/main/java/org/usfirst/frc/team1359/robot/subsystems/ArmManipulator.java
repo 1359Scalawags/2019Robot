@@ -1,28 +1,41 @@
 package org.usfirst.frc.team1359.robot.subsystems;
 
 import org.usfirst.frc.team1359.robot.Constants;
+import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorSlider;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ArmManipulator extends Subsystem {
 
 	DigitalInput bottomLimit, topLimit;
 	DigitalInput ballIn;
 	Talon leftBeltMotor , rightBeltMotor , rotateArmMotor;
+	float averagePercentageFromCenter;
 	//Solenoid rotateArm;
 	//Solenoid hatchPuncher;
 	Solenoid armExtender;
 	Solenoid hatchGrabber;
+	private double sliderTime;
+	private double sliderSpeed;
+	DigitalInput slideLeftLimit;
+	DigitalInput slideRightLimit;
+	Talon liftMotor, slideMotor;
+	private Timer timer;
+	private boolean isAtTarget;
+
 	//boolean beltsLocked; //still need to map the button
 
 	private static final int leftBeltMotorMultiplier = 1; // change to -1 to reverse direction for leftBeltMotor
 	private static final int rightBeltMotorMultiplier = 1;
 	private static final int armRotateMotorMultiplier = 1;
+	private static final int slideMotorMultiplier = 1; // change to -1 to reverse Slide Motor
 
 	public enum ArmPosition {
 		UP, DOWN
@@ -43,20 +56,88 @@ public class ArmManipulator extends Subsystem {
 		hatchGrabber = new Solenoid(RobotMap.hatchGrabber);
 		rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
 		//beltsLocked = true;
+		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
+		slideLeftLimit =  new DigitalInput(RobotMap.elevatorSlideLeftLimit);
+		slideRightLimit =  new DigitalInput(RobotMap.elevatorSlideRightLimit);
+		slideMotor = new Talon(RobotMap.elevatorSlideMotor);
+		isAtTarget = false;
+
 		rotateArmMotor.setName("rotateArmMotor");
 		rightBeltMotor.setName("rightBeltMotor");
 		leftBeltMotor.setName("leftBeltMotor");
 		armExtender.setName("armExtender");
+		slideMotor.setName("elevatorSlideMotor");
 		SmartDashboard.putData(rightBeltMotor);
 		SmartDashboard.putData(leftBeltMotor);
 		SmartDashboard.putData(armExtender);
 		SmartDashboard.putData(rotateArmMotor);
+		SmartDashboard.putData(slideMotor);
 		//SmartDashboard.putData(rotateArm);
 	}
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new MoveElevatorSlider());
 		// Set the default command for a subsystem here.
 	}
+
+	public void initializeMoveSlider(){
+		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
+		moveSliderJoystick(-2);
+		sliderTime = (Constants.sliderTimeToFarRight/*/100*//Constants.percentageFromCameraToFarRight)*averagePercentageFromCenter;
+		timer.reset();
+	}
+	
+	public void moveSlider() {	
+		if(averagePercentageFromCenter == -1){
+			stopElevatorSlideMotor();
+			isAtTarget = true;
+		}
+		else{
+			if(averagePercentageFromCenter > Constants.percentageFromCameraToFarRight){
+				stopElevatorSlideMotor();
+				isAtTarget = true;
+			}
+			else{
+				timer.start();
+				if((double)timer.get() < sliderTime){
+					slideMotor.set(sliderSpeed);
+				}
+				else{
+					stopElevatorSlideMotor();
+					isAtTarget = true;
+				}
+			}
+		}
+	}
+		public boolean isAtCenterTarget(){
+			return isAtTarget;
+		}
+
+	public void moveSliderJoystick(double speed){
+		speed = speed * slideMotorMultiplier;
+		if(speed > 0 && !isRightMax()){
+			slideMotor.set(speed);
+		}
+		else if(speed < 0 && !isLeftMax()){
+			slideMotor.set(speed);
+		}
+		else{
+			stopElevatorSlideMotor();
+		}
+	}
+	public boolean isLeftMax(){
+		return slideLeftLimit.get() == Constants.pressed;
+	}
+
+	public boolean isRightMax(){
+		return slideRightLimit.get() == Constants.pressed;
+	}
+	public void stopElevatorSlideMotor(){
+	slideMotor.set(0);
+	}
+	public double getSlideMotorSpeed(){
+			return slideMotor.getSpeed();
+		}
 	
 	public void moveBeltsIn() {
 		if(!isBallIn()){

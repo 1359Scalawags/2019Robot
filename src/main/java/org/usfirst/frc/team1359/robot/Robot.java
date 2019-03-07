@@ -171,7 +171,7 @@ public class Robot extends TimedRobot {
 
 		System.out.println("Lift and Slide motor speeds");
 		System.out.println(kElevatorManipulator.getliftMotorSpeed());
-		System.out.println(kElevatorManipulator.getSlideMotorSpeed());
+		System.out.println(kArmManipulator.getSlideMotorSpeed());
 		System.out.println("===============");
 	}
 

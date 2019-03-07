@@ -61,7 +61,7 @@ public class OI {
 		// moveArmsUp.whenPressed(new MoveArmsUp());
 		getHatchFromPortal.whenPressed(new GetHatchFromPortal());
 		moveArmsUpAndDown.whenPressed(new MoveArmsUpAndDown());
-	//	moveElevatorSlider.whenPressed(new MoveElevatorSlider(Robot.override.getSelected()));
+		moveElevatorSlider.whenPressed(new MoveElevatorSlider());
 		extendAndRetractArms.whenPressed(new ExtendAndRetractArms());
 		stopBelts.whenPressed(new StopBelts());
 		IntakeBall.whenPressed(new BallIntake());

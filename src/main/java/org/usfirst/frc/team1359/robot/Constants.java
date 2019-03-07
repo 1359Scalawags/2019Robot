@@ -34,7 +34,7 @@ public class Constants {
 
 	public static final double withinHeight = .5; // how close the elevator needs to be to target height (in inches)
 	//public static final double valuePerAngle = 200; // random value 
-	public final static double potentiometerFullRange = 1;
+	public final static double potentiometerFullRange = 4.768; //was 1
 	public static final double potentiometerOffset = 0;
 	public static final double potentiometerUpVoltage = 2.315;
 	public static final double potentiometerDownVoltage = 4.768;
