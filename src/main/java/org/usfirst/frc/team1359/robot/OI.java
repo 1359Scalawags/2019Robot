@@ -79,7 +79,10 @@ public class OI {
 		putHatchCargoShip.whenPressed(new PutHatchToHeight(Constants.liftToHatchPortal));
 		//*/
 
-		upArrow.whenPressed(new RetractArms());
+		rightArrow.whenPressed(new RetractArms());
+		leftArrow.whenPressed(new ExtendArms());
+		upArrow.whenPressed(new GrabHatch());
+		downArrow.whenPressed(new ReleaseHatch());
 
 	//	moveArmsDown.whenPressed(new MoveArmsDown());
 	//	moveArmsUp.whenPressed(new MoveArmsUp());
