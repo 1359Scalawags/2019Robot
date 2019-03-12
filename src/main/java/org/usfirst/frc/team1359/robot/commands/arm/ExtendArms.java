@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ExtendArms extends Command {
 
 	public ExtendArms() {
-		super("ExtendArmsOut");
+		super("ExtendArms");
 		requires(Robot.kArmManipulator);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

@@ -23,7 +23,8 @@ public class MoveArmsDown extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-        Robot.kArmManipulator.rotateArms(ArmPosition.DOWN);
+	   // Robot.kArmManipulator.rotateArms(ArmPosition.DOWN);
+	   Robot.kArmManipulator.goDown();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

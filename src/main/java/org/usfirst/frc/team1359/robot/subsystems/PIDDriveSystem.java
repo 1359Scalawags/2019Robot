@@ -22,16 +22,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PIDDriveSystem extends Subsystem {
 
 	// left side
-	//Talon m_frontLeft = new Talon(RobotMap.frontLeftMotor);
-	Talon m_rearLeft = new Talon(RobotMap.rearleftMotor); //new
+	Talon m_frontLeft = new Talon(RobotMap.frontLeftMotor); //new
+	Talon m_rearLeft = new Talon(RobotMap.rearleftMotor); 
 
-	SpeedControllerGroup leftMotorGroup  = new SpeedControllerGroup(/*m_frontLeft,*/ m_rearLeft); 
+	SpeedControllerGroup leftMotorGroup  = new SpeedControllerGroup(m_frontLeft, m_rearLeft); 
 
 	// right side
-//	Talon m_frontRight = new Talon(RobotMap.frontRightMotor);
-	Talon m_rearRight = new Talon(RobotMap.rearRightMotor); //new
+	Talon m_frontRight = new Talon(RobotMap.frontRightMotor); //new
+	Talon m_rearRight = new Talon(RobotMap.rearRightMotor); 
 
-	SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(/*m_frontRight,*/ m_rearRight); // = new SpeedControllerGroup(m_frontRight, m_rearRight);
+	SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(m_frontRight, m_rearRight); // = new SpeedControllerGroup(m_frontRight, m_rearRight);
 	
 	boolean reverse = false;
 	
@@ -85,19 +85,19 @@ public class PIDDriveSystem extends Subsystem {
 	}
 
 	public double getDistanceLeft() {
-		return leftEncoder.getDistance();
+		return -leftEncoder.getDistance();
 	}
 
 	public double getRateLeft() {
-		return -leftEncoder.getRate();
+		return leftEncoder.getRate();
 	}
 
 	public double getDistanceRight() {
-		return rightEncoder.getDistance();
+		return -rightEncoder.getDistance();
 	}
 
 	public double getRateRight() {
-		return -rightEncoder.getRate();
+		return rightEncoder.getRate();
 	}
 
 	public double getAverageDistance() {

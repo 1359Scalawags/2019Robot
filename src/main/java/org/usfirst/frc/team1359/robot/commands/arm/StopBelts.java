@@ -27,7 +27,7 @@ public class StopBelts extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         SmartDashboard.putBoolean("Belts stopped", false);
-        Robot.kArmManipulator.stopBelts();
+      //  Robot.kArmManipulator.stopBelts(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

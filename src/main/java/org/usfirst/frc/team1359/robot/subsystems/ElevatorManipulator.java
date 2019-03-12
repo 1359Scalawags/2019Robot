@@ -4,7 +4,7 @@ import org.usfirst.frc.team1359.robot.Constants;
 //import org.usfirst.frc.team1359.robot.Robot;
 import org.usfirst.frc.team1359.robot.RobotMap;
 import org.usfirst.frc.team1359.robot.SoftenOutput;
-import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevator;
+import org.usfirst.frc.team1359.robot.commands.Elevator.MoveElevatorJoystick;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 //import edu.wpi.first.wpilibj.DigitalInput;
@@ -79,8 +79,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new MoveElevator());
-		//setDefaultCommand(new MoveElevatorDown());
+		//setDefaultCommand(new MoveElevator());
+		setDefaultCommand(new MoveElevatorJoystick());
 	}
 
 	public void switchModes(){
@@ -256,6 +256,19 @@ public class ElevatorManipulator extends Subsystem {
 	// 	}
 	// }
 
+	public void moveElevatorJoystick(double speed){ // positive speed is up
+		if(speed > 0.1 && getElevatorHeight() <= Constants.hatchTopHeight){
+			liftMotor.set(speed);
+		}
+		else if(speed < -.1 && getElevatorHeight() >= 4){
+			liftMotor.set(speed);
+		}
+		else{
+			stopElevatorLiftMotor();
+		}
+
+	}
+
 	public void moveElevator(){
 		if(heightMode == (HeightMode.HATCH)){
 			moveElevatorHatch();
@@ -303,6 +316,7 @@ public class ElevatorManipulator extends Subsystem {
 
 	public void moveElevatorToHeight(double height){
 		double distanceFromTarget = height - getElevatorHeight();
+		isHeight = false;
 		if(Math.abs(distanceFromTarget) > Constants.withinHeight /*&& !isUpMax() && !isDownMax()*/){
 			if(getElevatorHeight() > height){
 				lowerElevator();
@@ -319,6 +333,7 @@ public class ElevatorManipulator extends Subsystem {
 
 	public boolean isToHeight(){
 		return isHeight;
+	//	return (Math.abs(height - getElevatorHeight()) < Constants.withinHeight);
 	}
 
 	private void lowerElevator(){
@@ -326,8 +341,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	private void raiseElevator(){
-		liftMotor.set(bufferLiftMotor.getOutput(Constants.elevatorLiftSpeed)*liftMotorMulitplier);
-		//liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
+		//liftMotor.set(bufferLiftMotor.getOutput(Constants.elevatorLiftSpeed)*liftMotorMulitplier);
+		liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
 	}
 
 	// public boolean isDownMax() {

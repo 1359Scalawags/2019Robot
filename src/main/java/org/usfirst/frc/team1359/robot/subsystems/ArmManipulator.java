@@ -16,7 +16,8 @@ public class ArmManipulator extends Subsystem {
 
 	DigitalInput bottomLimit, topLimit;
 	DigitalInput ballIn;
-	Talon leftBeltMotor , rightBeltMotor , rotateArmMotor;
+	//Talon leftBeltMotor , rightBeltMotor , rotateArmMotor;
+	Talon rotateArmMotor;
 	float averagePercentageFromCenter;
 	//Solenoid rotateArm;
 	//Solenoid hatchPuncher;
@@ -48,27 +49,25 @@ public class ArmManipulator extends Subsystem {
 		bottomLimit = new DigitalInput(RobotMap.armBottomLimit);
 		topLimit = new DigitalInput(RobotMap.armTopLimit);
 		ballIn = new DigitalInput(RobotMap.ballInLimit);
-		leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
-		rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
-		//rotateArm = new Solenoid(RobotMap.armRotator);
-	//	hatchPuncher = new Solenoid(RobotMap.hatchPuncher);
+		//leftBeltMotor = new Talon(RobotMap.leftBeltMotor);
+		//rightBeltMotor = new Talon(RobotMap.rightBeltMotor);
 		armExtender = new Solenoid(RobotMap.armExtender);
 		hatchGrabber = new Solenoid(RobotMap.hatchGrabber);
 		rotateArmMotor = new Talon(RobotMap.rotateArmMotor);
-		//beltsLocked = true;
 		sliderSpeed = Constants.slideMotorSpeed * slideMotorMultiplier;
 		slideLeftLimit =  new DigitalInput(RobotMap.elevatorSlideLeftLimit);
 		slideRightLimit =  new DigitalInput(RobotMap.elevatorSlideRightLimit);
 		slideMotor = new Talon(RobotMap.elevatorSlideMotor);
 		isAtTarget = false;
+		timer = new Timer();
 
 		rotateArmMotor.setName("rotateArmMotor");
-		rightBeltMotor.setName("rightBeltMotor");
-		leftBeltMotor.setName("leftBeltMotor");
+	//	rightBeltMotor.setName("rightBeltMotor");
+	//	leftBeltMotor.setName("leftBeltMotor");
 		armExtender.setName("armExtender");
 		slideMotor.setName("elevatorSlideMotor");
-		SmartDashboard.putData(rightBeltMotor);
-		SmartDashboard.putData(leftBeltMotor);
+	//	SmartDashboard.putData(rightBeltMotor);
+	//	SmartDashboard.putData(leftBeltMotor);
 		SmartDashboard.putData(armExtender);
 		SmartDashboard.putData(rotateArmMotor);
 		SmartDashboard.putData(slideMotor);
@@ -82,12 +81,13 @@ public class ArmManipulator extends Subsystem {
 
 	public void initializeMoveSlider(){
 		averagePercentageFromCenter = (Robot.kNetwork.xPercentage + Robot.kNetwork.xPercentage) / 2;
-		moveSliderJoystick(-2);
+		//moveSliderJoystick(.5);
 		sliderTime = (Constants.sliderTimeToFarRight/*/100*//Constants.percentageFromCameraToFarRight)*averagePercentageFromCenter;
 		timer.reset();
 	}
 	
-	public void moveSlider() {	
+	public void moveSlider() {
+	//	moveSliderJoystick(.5);	
 		if(averagePercentageFromCenter == -1){
 			stopElevatorSlideMotor();
 			isAtTarget = true;
@@ -115,10 +115,10 @@ public class ArmManipulator extends Subsystem {
 
 	public void moveSliderJoystick(double speed){
 		speed = speed * slideMotorMultiplier;
-		if(speed > 0 && !isRightMax()){
+		if(speed < 0 && !isRightMax()){
 			slideMotor.set(speed);
 		}
-		else if(speed < 0 && !isLeftMax()){
+		else if(speed > 0 && !isLeftMax()){
 			slideMotor.set(speed);
 		}
 		else{
@@ -139,28 +139,28 @@ public class ArmManipulator extends Subsystem {
 			return slideMotor.getSpeed();
 		}
 	
-	public void moveBeltsIn() {
-		if(!isBallIn()){
-			leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
-			rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
-		}
-		else{
-			stopBelts();
-		}
-	}
+	// public void moveBeltsIn() {
+	// 	if(!isBallIn()){
+	// 		leftBeltMotor.set(Constants.moveBeltSpeed * leftBeltMotorMultiplier);
+	// 		rightBeltMotor.set(-(Constants.moveBeltSpeed * rightBeltMotorMultiplier));
+	// 	}
+	// 	else{
+	// 		stopBelts(true);
+	// 	}
+	// }
 
-	public void moveBeltsOut(){
-		 	leftBeltMotor.set(-(Constants.moveBeltSpeed * leftBeltMotorMultiplier));
-		 	rightBeltMotor.set(Constants.moveBeltSpeed * rightBeltMotorMultiplier);
-	}
+	// public void moveBeltsOut(){
+	// 	 	leftBeltMotor.set(-(Constants.moveBeltSpeed * leftBeltMotorMultiplier));
+	// 	 	rightBeltMotor.set(Constants.moveBeltSpeed * rightBeltMotorMultiplier);
+	// }
 
-	public double getLeftBeltSpeed(){
-		return leftBeltMotor.getSpeed();
-	}
+	// public double getLeftBeltSpeed(){
+	// 	return leftBeltMotor.getSpeed();
+	// }
 
-	public double getRightBeltSpeed(){
-		return rightBeltMotor.getSpeed();
-	}
+	// public double getRightBeltSpeed(){
+	// 	return rightBeltMotor.getSpeed();
+	// }
 	// public void extendHatchPuncher(){
 	// 	hatchPuncher.set(true);
 	// }
@@ -170,18 +170,18 @@ public class ArmManipulator extends Subsystem {
 	// }
 
 	public void extendArms(){
-		armExtender.set(false); // false extends the arm
+		armExtender.set(true); // false extends the arm
 	}
 
 	public void retractArms(){
-		armExtender.set(true);
+		armExtender.set(false);
 	}
 
 	public void grabHatch(){
-		hatchGrabber.set(false); //false grabs
+		hatchGrabber.set(true);
 	}
 	public void releaseHatch(){
-		hatchGrabber.set(true);
+		hatchGrabber.set(false);
 	}
 	
 	// public void rotateArms(ArmPosition pos) {
@@ -205,8 +205,8 @@ public class ArmManipulator extends Subsystem {
 			}
 	}
 		
-	private void goDown() {
-		if(!isDown()){
+	public void goDown() {
+		if(!isDown()){ 
 			rotateArmMotor.set(Constants.rotateArmSpeed*armRotateMotorMultiplier); 
 		}
 		else{
@@ -214,7 +214,11 @@ public class ArmManipulator extends Subsystem {
 		}
 	}
 
-	private void goUp() {
+	public void stopRotateMotor(){
+		rotateArmMotor.set(0);
+	}
+
+	public void goUp() {
 		if(!isUp()){
 			rotateArmMotor.set((-Constants.rotateArmSpeed)*armRotateMotorMultiplier);
 		}
@@ -231,10 +235,16 @@ public class ArmManipulator extends Subsystem {
 	// 	rotateArm.set(true); // true is moving the arms up
 	// }
 
-	public void stopBelts() {
-		leftBeltMotor.set(0);
-		rightBeltMotor.set(0);
-	}
+	// public void stopBelts(boolean frictionIn) {
+	// 	if(frictionIn){
+	// 		leftBeltMotor.set(.15);
+	// 		rightBeltMotor.set(-.15);
+	// 	}
+	// 	else{
+	// 		leftBeltMotor.set(0);
+	// 		rightBeltMotor.set(0);
+	// 	}
+	// }
 
 	public boolean isBallIn(){
 		return ballIn.get() == Constants.pressed;

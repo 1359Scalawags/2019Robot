@@ -12,11 +12,11 @@ public class Constants {
 	public static final float withinPercentageToCenter = 5; // percentage
 	public static final double slideMotorSpeed = 1; //random value
 	public static final double climbMotorSpeed = 1; // random value 
-	public static final double rotateArmSpeed = .5; // random value 
+	public static final double rotateArmSpeed = .4; // random value 
 	public static final double moveBeltSpeed = 1; // random value 
 	public static final double elevatorLiftSpeed = 1; // random value
-	public static final double elevatorLiftStallSpeed = .15; //random value
-	public static final int elevatorSampleSize = 8;
+	public static final double elevatorLiftStallSpeed = .08; //random value
+	public static final int elevatorSampleSize = 2;
 
 	public static final float hatchBaseHeight = 19 - 15; // inches
 	public static final float hatchMiddleHeight = 47 - 15; // inches
@@ -24,8 +24,8 @@ public class Constants {
 	//public static final float hatchBottomHeight = 0; // inches
 	public static final float restingHeight = 0;
 
-	public static final float liftAboveBrushHeight = 6; //inches
-	public static final float liftToHatchPortal = 2; // inches
+	public static final float liftAboveBrushHeight = 7; //inches was 6
+	public static final float liftToHatchPortal = 5; // inches was 2
 
 	public static final float cargoShipCargoHeight = 39.5f - 15; //inches
 	public static final float cargoLowerHeight = 27.5f - 15; // inches
@@ -64,7 +64,7 @@ public class Constants {
 	public static final int samplesToAverage = 2;
 
 	// gameController
-	public static final double controllerDeadZone = .1;
+	public static final double controllerDeadZone = .05;
 	public static final double ROTATE_TOLERANCE = 0.5;
 	public static final double angleToleranceVision = 5;
 	
@@ -94,6 +94,7 @@ public class Constants {
 	public static final double distanceAcrossScale = 18.3; 
 	public static final double distanceToMiddle = 18; 
 	public static final double approachScaleBox=-3; 
+	public static final double distanceAcrossLine = 3;
 
 	public static final double moveToMiddleArmTime = 2.25;
 	public static final double moveToMiddleArmSpeed = .50;
@@ -103,6 +104,6 @@ public class Constants {
 	public static final String autoModeMiddle = "Middle";
 	public static final String autoModeRight = "Right";
 
-	public static final String overrideVisionYes = "YES";
-	public static final String overrideVisionNo = "NO";
+	public static final String overrideYes = "YES";
+	public static final String overrideNo = "NO";
 }

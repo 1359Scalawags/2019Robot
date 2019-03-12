@@ -14,6 +14,7 @@ public class MoveElevator extends CommandGroup {
 	private OI.DPadState dpadState;
 	public MoveElevator() {
         super("MoveElevator");
+        requires(Robot.kElevatorManipulator);
         dpadState = Robot.kOI.getDpadYValue();
         addSequential(new Delay(.25f));
         if(dpadState == OI.DPadState.DOWN){

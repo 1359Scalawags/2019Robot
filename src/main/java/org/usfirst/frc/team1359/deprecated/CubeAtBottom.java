@@ -36,7 +36,7 @@ public class CubeAtBottom extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 
-		Robot.kArmManipulator.stopBelts();
+	//	Robot.kArmManipulator.stopBelts();
 	}
 
 	// Called when another command which requires one or more of the same

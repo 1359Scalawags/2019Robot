@@ -30,10 +30,15 @@ public class MoveElevatorSlider extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		visionOverride = Robot.override.getSelected();
-		if(visionOverride.equals(Constants.overrideVisionYes)){
-			override = VisionOverride.YES;
+		if(visionOverride!= null){
+			if(visionOverride.equals(Constants.overrideYes)){
+				override = VisionOverride.YES;
+			}
+			if(!(override == VisionOverride.YES)){
+				Robot.kArmManipulator.initializeMoveSlider();
+			}
 		}
-		if(!(override == VisionOverride.YES)){
+		else{
 			Robot.kArmManipulator.initializeMoveSlider();
 		}
 	}
