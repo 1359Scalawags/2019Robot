@@ -16,7 +16,7 @@ public class Constants {
 	public static final double moveBeltSpeed = 1; // random value 
 	public static final double elevatorLiftSpeed = 1; // random value
 	public static final double elevatorLiftStallSpeed = .08; //random value
-	public static final int elevatorSampleSize = 2;
+	public static final int elevatorSampleSize = 8;
 
 	public static final float hatchBaseHeight = 19 - 15; // inches
 	public static final float hatchMiddleHeight = 47 - 15; // inches

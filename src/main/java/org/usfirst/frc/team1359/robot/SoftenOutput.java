@@ -15,6 +15,12 @@ public class SoftenOutput{
         total -= samples[index];
         samples[index] = input;
         total += input;
+        if(index < samplesize - 1){
+            index++;
+        }
+        else{
+            index = 0;
+        }
         return total/samplesize;
     }
 }

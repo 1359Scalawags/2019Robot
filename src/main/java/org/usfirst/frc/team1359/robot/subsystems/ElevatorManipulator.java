@@ -341,8 +341,8 @@ public class ElevatorManipulator extends Subsystem {
 	}
 
 	private void raiseElevator(){
-		//liftMotor.set(bufferLiftMotor.getOutput(Constants.elevatorLiftSpeed)*liftMotorMulitplier);
-		liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
+		liftMotor.set(bufferLiftMotor.getOutput(Constants.elevatorLiftSpeed)*liftMotorMulitplier);
+		//liftMotor.set(Constants.elevatorLiftSpeed* liftMotorMulitplier);
 	}
 
 	// public boolean isDownMax() {

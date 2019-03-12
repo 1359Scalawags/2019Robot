@@ -133,15 +133,13 @@ public class Robot extends TimedRobot {
 	//	this.AutonomousLeftOrRightPriority = m_priority.getSelected();
 	//	this.AutonomousMiddlePriority = m_priorityMiddle.getSelected();
 	//	m_autonomousCommand = new AutonomousCommandDispatch(m_override.getSelected());
-		m_autonomousCommand = new DriveAcrossLine();
-		m_autonomousCommand.start();
-			// if (autoOverride != null && m_autonomousCommand != null && autoOverride.getSelected() == Constants.overrideNo) {
-			// 	m_autonomousCommand.start();
-			// } else {
-			// 	kPIDDriveSystem.resetEncoders();
-			// //	kArmManipulator.stopRotateMotor();		
-				
-			// }
+	//	m_autonomousCommand = new DriveAcrossLine();
+		//m_autonomousCommand.start();
+			if (autoOverride != null && m_autonomousCommand != null && autoOverride.getSelected() == Constants.overrideNo) {
+				m_autonomousCommand.start();
+				m_autonomousCommand = new DriveAcrossLine();
+			} else {		
+			}
 
 		
 	}
